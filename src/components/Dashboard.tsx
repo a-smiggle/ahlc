@@ -29,7 +29,9 @@ import type {
 } from "@/types/models";
 import { ActionMenu } from "@/components/ActionMenu";
 import { AdSlot } from "@/components/AdSlot";
+import { LegalAcceptanceModal } from "@/components/LegalAcceptanceModal";
 import { DeleteIconButton } from "@/components/ui/DeleteIconButton";
+import { DashboardTabs } from "@/components/ui/DashboardTabs";
 import { ItemCardHeader } from "@/components/ui/ItemCardHeader";
 import { MenuToggleButton } from "@/components/ui/MenuToggleButton";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
@@ -37,9 +39,11 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ThemeToggleButton } from "@/components/ui/ThemeToggleButton";
 import { currency, percent } from "@/utils/format";
 import { clearState, exportStateJson, importStateJson, loadState, saveState } from "@/utils/storage";
+import type { DashboardTab } from "@/components/ui/DashboardTabs";
 
 const id = () => (typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`);
 const THEME_STORAGE_KEY = "ahlc-theme";
+const LEGAL_ACCEPTED_STORAGE_KEY = "ahlc-legal-accepted";
 type ExpenseCadence = "weekly" | "monthly" | "yearly";
 
 const cadenceToAnnualFactor: Record<ExpenseCadence, number> = {
@@ -62,7 +66,9 @@ export const Dashboard = () => {
   const [importError, setImportError] = useState<string | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [hasAcceptedLegal, setHasAcceptedLegal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<DashboardTab>("personal");
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   const applyTheme = (dark: boolean) => {
@@ -85,6 +91,9 @@ export const Dashboard = () => {
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     applyTheme(storedTheme ? storedTheme === "dark" : prefersDark);
 
+    const accepted = window.localStorage.getItem(LEGAL_ACCEPTED_STORAGE_KEY) === "true";
+    setHasAcceptedLegal(accepted);
+
     setIsHydrated(true);
   }, []);
 
@@ -99,6 +108,14 @@ export const Dashboard = () => {
 
     window.localStorage.setItem(THEME_STORAGE_KEY, isDark ? "dark" : "light");
   }, [isDark, isHydrated]);
+
+  useEffect(() => {
+    if (!isHydrated || !hasAcceptedLegal) {
+      return;
+    }
+
+    window.localStorage.setItem(LEGAL_ACCEPTED_STORAGE_KEY, "true");
+  }, [hasAcceptedLegal, isHydrated]);
 
   useEffect(() => {
     if (!menuOpen) {
@@ -249,6 +266,10 @@ export const Dashboard = () => {
   const expensePeriodLabel =
     expenseCadence === "weekly" ? "Weekly" : expenseCadence === "monthly" ? "Monthly" : "Annual";
   const fromAnnualExpense = (annual: number) => annual / cadenceToAnnualFactor[expenseCadence];
+  const isPersonalTab = activeTab === "personal";
+  const isLendingTab = activeTab === "lending";
+  const isLoanTab = activeTab === "loan";
+  const isChartsTab = activeTab === "charts";
 
   return (
     <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_18rem]">
@@ -279,6 +300,9 @@ export const Dashboard = () => {
         {importError ? <p className="mt-2 text-sm text-token-risk">{importError}</p> : null}
       </section>
 
+      <DashboardTabs activeTab={activeTab} onChange={setActiveTab} />
+
+      {isPersonalTab ? (
       <section className="panel space-y-4 p-4 md:p-6">
           <SectionHeader
             title={<h2 className="text-2xl font-bold text-token-income">Income</h2>}
@@ -329,7 +353,7 @@ export const Dashboard = () => {
                 }
               />
               <div className="grid gap-3 md:grid-cols-4">
-                <label className="space-y-1 text-sm">
+                <label className="space-y-1 text-sm" title="Name this income stream so you can identify it later.">
                   <span className="block text-xs font-semibold text-token-ink/75">Income Label</span>
                   <input
                     value={income.label}
@@ -339,7 +363,7 @@ export const Dashboard = () => {
                     title="Income stream label"
                   />
                 </label>
-                <label className="space-y-1 text-sm">
+                <label className="space-y-1 text-sm" title="Select employment type: PAYG = salaried wages, Contractor = contract income, Casual = variable shifts, Self-employed = business income.">
                   <span className="block text-xs font-semibold text-token-ink/75">Employment Type</span>
                   <select
                     value={income.employmentType}
@@ -353,7 +377,7 @@ export const Dashboard = () => {
                     <option value="self-employed">Self-employed</option>
                   </select>
                 </label>
-                <label className="space-y-1 text-sm">
+                <label className="space-y-1 text-sm" title="Choose income input mode: Gross = before tax, Net = after tax take-home.">
                   <span className="block text-xs font-semibold text-token-ink/75">Income Input Mode</span>
                   <select
                     value={income.inputMode}
@@ -365,7 +389,7 @@ export const Dashboard = () => {
                     <option value="net">Net</option>
                   </select>
                 </label>
-                <label className="flex items-center gap-2 text-sm">
+                <label className="flex items-center gap-2 text-sm" title="Enable if this income earner has HECS/HELP debt.">
                   <input
                     type="checkbox"
                     checked={income.hasHecsHelpDebt}
@@ -376,7 +400,7 @@ export const Dashboard = () => {
                 </label>
               </div>
               <div className="mt-3 grid gap-3 md:grid-cols-3">
-                <label className="space-y-1 text-sm">
+                <label className="space-y-1 text-sm" title="Enter annual base salary before bonuses or overtime.">
                   <span className="block text-xs font-semibold text-token-ink/75">Base Income (Annual)</span>
                   <input
                     type="number"
@@ -387,7 +411,7 @@ export const Dashboard = () => {
                     title="Base annual income"
                   />
                 </label>
-                <label className="space-y-1 text-sm">
+                <label className="space-y-1 text-sm" title="Enter expected annual bonus income.">
                   <span className="block text-xs font-semibold text-token-ink/75">Bonus Income (Annual)</span>
                   <input
                     type="number"
@@ -398,7 +422,7 @@ export const Dashboard = () => {
                     title="Annual bonus income"
                   />
                 </label>
-                <label className="space-y-1 text-sm">
+                <label className="space-y-1 text-sm" title="Enter expected annual overtime income.">
                   <span className="block text-xs font-semibold text-token-ink/75">Overtime Income (Annual)</span>
                   <input
                     type="number"
@@ -413,11 +437,15 @@ export const Dashboard = () => {
             </div>
           ))}
       </section>
+      ) : null}
 
+      {isPersonalTab || isLendingTab || isLoanTab ? (
       <section className="xl:hidden">
         <AdSlot />
       </section>
+      ) : null}
 
+      {isLendingTab ? (
       <section className="panel space-y-4 p-4 md:p-6">
         <SectionHeader
           title={<h2 className="text-2xl font-bold text-token-scenario">Assets, Equity, and Costs</h2>}
@@ -475,7 +503,7 @@ export const Dashboard = () => {
               }
             />
             <div className="grid gap-3 md:grid-cols-4">
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Name this asset for easier tracking.">
                 <span className="block text-xs font-semibold text-token-ink/75">Asset Name</span>
                 <input
                   className="rounded border p-2"
@@ -485,7 +513,7 @@ export const Dashboard = () => {
                   title="Asset name"
                 />
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Select asset type: PPOR = primary home, Investment = income-producing property, Future purchase = planned property not yet owned.">
                 <span className="block text-xs font-semibold text-token-ink/75">Asset Type</span>
                 <select
                   className="rounded border p-2"
@@ -498,7 +526,7 @@ export const Dashboard = () => {
                   <option value="future">Future purchase</option>
                 </select>
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Enter the current estimated market value of this asset.">
                 <span className="block text-xs font-semibold text-token-ink/75">Estimated Value</span>
                 <input
                   className="rounded border p-2"
@@ -509,7 +537,7 @@ export const Dashboard = () => {
                   title="Estimated property value"
                 />
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Enter the remaining loan balance secured against this asset.">
                 <span className="block text-xs font-semibold text-token-ink/75">Loan Balance</span>
                 <input
                   className="rounded border p-2"
@@ -522,7 +550,7 @@ export const Dashboard = () => {
               </label>
             </div>
             <div className="mt-3 grid gap-3 md:grid-cols-4">
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Enter expected annual gross rental income for this asset.">
                 <span className="block text-xs font-semibold text-token-ink/75">Rental Income (Annual)</span>
                 <input
                   className="rounded border p-2"
@@ -533,7 +561,7 @@ export const Dashboard = () => {
                   title="Annual rental income"
                 />
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Percentage of rental income recognised for servicing.">
                 <span className="block text-xs font-semibold text-token-ink/75">Rental Shading Factor</span>
                 <input
                   className="rounded border p-2"
@@ -545,7 +573,7 @@ export const Dashboard = () => {
                   title="Rental income shading factor"
                 />
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Expected vacancy proportion for this property.">
                 <span className="block text-xs font-semibold text-token-ink/75">Vacancy Rate</span>
                 <input
                   className="rounded border p-2"
@@ -557,7 +585,7 @@ export const Dashboard = () => {
                   title="Vacancy rate"
                 />
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Maximum LVR used to estimate usable equity.">
                 <span className="block text-xs font-semibold text-token-ink/75">Maximum LVR for Equity</span>
                 <input
                   className="rounded border p-2"
@@ -571,7 +599,7 @@ export const Dashboard = () => {
               </label>
             </div>
             <div className="mt-3 grid gap-3 md:grid-cols-4">
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Annual council rates for this property.">
                 <span className="block text-xs font-semibold text-token-ink/75">Council Rates (Annual)</span>
                 <input
                   className="rounded border p-2"
@@ -586,7 +614,7 @@ export const Dashboard = () => {
                   title="Annual council rates"
                 />
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Annual water rates for this property.">
                 <span className="block text-xs font-semibold text-token-ink/75">Water Rates (Annual)</span>
                 <input
                   className="rounded border p-2"
@@ -601,7 +629,7 @@ export const Dashboard = () => {
                   title="Annual water rates"
                 />
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Annual insurance cost for this property.">
                 <span className="block text-xs font-semibold text-token-ink/75">Insurance (Annual)</span>
                 <input
                   className="rounded border p-2"
@@ -616,7 +644,7 @@ export const Dashboard = () => {
                   title="Annual insurance cost"
                 />
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Annual maintenance allowance for this property.">
                 <span className="block text-xs font-semibold text-token-ink/75">Maintenance Allowance (Annual)</span>
                 <input
                   className="rounded border p-2"
@@ -631,7 +659,7 @@ export const Dashboard = () => {
                   title="Annual maintenance allowance"
                 />
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Annual property management fee amount.">
                 <span className="block text-xs font-semibold text-token-ink/75">Management Fees (Annual)</span>
                 <input
                   className="rounded border p-2"
@@ -646,7 +674,7 @@ export const Dashboard = () => {
                   title="Annual property management fees"
                 />
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Annual vacancy allowance amount.">
                 <span className="block text-xs font-semibold text-token-ink/75">Vacancy Allowance (Annual)</span>
                 <input
                   className="rounded border p-2"
@@ -661,7 +689,7 @@ export const Dashboard = () => {
                   title="Annual vacancy allowance"
                 />
               </label>
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Annual body corporate fees.">
                 <span className="block text-xs font-semibold text-token-ink/75">Body Corporate (Annual)</span>
                 <input
                   className="rounded border p-2"
@@ -680,13 +708,15 @@ export const Dashboard = () => {
           </div>
         ))}
       </section>
+      ) : null}
 
       <section className="space-y-6">
+        {isPersonalTab ? (
         <div className="panel space-y-4 p-4 md:p-6">
           <SectionHeader
             title={<h2 className="text-2xl font-bold text-token-expenses">Household Expenses</h2>}
             action={
-              <label className="space-y-1 text-sm">
+              <label className="space-y-1 text-sm" title="Choose expense frequency: Weekly = amount per week, Monthly = amount per month, Yearly = annual amount.">
                 <span className="block text-xs font-semibold text-token-ink/75">Expense frequency</span>
                 <select
                   className="rounded border p-2"
@@ -702,76 +732,84 @@ export const Dashboard = () => {
             }
           />
           <div className="grid gap-3 md:grid-cols-2">
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title={`${expensePeriodLabel} groceries spend.`}>
               <span className="block text-xs font-semibold text-token-ink/75">Groceries</span>
               <input type="number" value={fromAnnualExpense(state.expenses.groceriesAnnual)} onChange={(event) => handleExpenseChange("groceriesAnnual", Number(event.target.value) || 0)} className="rounded border p-2" aria-label="Groceries" title={`${expensePeriodLabel} groceries expense`} />
             </label>
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title={`${expensePeriodLabel} utilities spend.`}>
               <span className="block text-xs font-semibold text-token-ink/75">Utilities</span>
               <input type="number" value={fromAnnualExpense(state.expenses.utilitiesAnnual)} onChange={(event) => handleExpenseChange("utilitiesAnnual", Number(event.target.value) || 0)} className="rounded border p-2" aria-label="Utilities" title={`${expensePeriodLabel} utilities expense`} />
             </label>
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title={`${expensePeriodLabel} transport spend.`}>
               <span className="block text-xs font-semibold text-token-ink/75">Transport</span>
               <input type="number" value={fromAnnualExpense(state.expenses.transportAnnual)} onChange={(event) => handleExpenseChange("transportAnnual", Number(event.target.value) || 0)} className="rounded border p-2" aria-label="Transport" title={`${expensePeriodLabel} transport expense`} />
             </label>
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title={`${expensePeriodLabel} insurance spend.`}>
               <span className="block text-xs font-semibold text-token-ink/75">Insurance</span>
               <input type="number" value={fromAnnualExpense(state.expenses.insuranceAnnual)} onChange={(event) => handleExpenseChange("insuranceAnnual", Number(event.target.value) || 0)} className="rounded border p-2" aria-label="Insurance" title={`${expensePeriodLabel} insurance expense`} />
             </label>
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title={`${expensePeriodLabel} childcare and education spend.`}>
               <span className="block text-xs font-semibold text-token-ink/75">Childcare & Education</span>
               <input type="number" value={fromAnnualExpense(state.expenses.childcareEducationAnnual)} onChange={(event) => handleExpenseChange("childcareEducationAnnual", Number(event.target.value) || 0)} className="rounded border p-2" aria-label="Childcare and education" title={`${expensePeriodLabel} childcare and education expense`} />
             </label>
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title={`${expensePeriodLabel} discretionary spend.`}>
               <span className="block text-xs font-semibold text-token-ink/75">Discretionary</span>
               <input type="number" value={fromAnnualExpense(state.expenses.discretionaryAnnual)} onChange={(event) => handleExpenseChange("discretionaryAnnual", Number(event.target.value) || 0)} className="rounded border p-2" aria-label="Discretionary" title={`${expensePeriodLabel} discretionary expense`} />
             </label>
           </div>
           <div className="space-y-2">
+            <h3 className="text-lg font-semibold text-token-expenses">Custom Expenses</h3>
             {state.expenses.custom.length === 0 ? <p className="text-sm text-token-ink/70">No custom expenses yet.</p> : null}
-            {state.expenses.custom.map((item, index) => (
-              <div key={item.id} className="rounded border border-token-ink/15 p-3">
-                <ItemCardHeader
-                  className="mb-2"
-                  label={<span className="text-xs font-semibold text-token-ink/60">Custom expense {index + 1}</span>}
-                  action={
-                    <DeleteIconButton
-                      label="Remove custom expense"
-                      onClick={() =>
-                        setState((prev) => ({
-                          ...prev,
-                          expenses: {
-                            ...prev.expenses,
-                            custom: prev.expenses.custom.filter((_, i) => i !== index)
-                          }
-                        }))
-                      }
-                    />
-                  }
-                />
-                <div className="grid grid-cols-2 gap-2">
-                <label className="space-y-1 text-sm">
-                  <span className="block text-xs font-semibold text-token-ink/75">Custom Expense Name</span>
-                  <input
-                    className="rounded border p-2"
-                    value={item.label}
-                    onChange={(event) => handleCustomExpenseChange(index, { label: event.target.value })}
-                    title="Custom expense name"
-                  />
-                </label>
-                <label className="space-y-1 text-sm">
-                  <span className="block text-xs font-semibold text-token-ink/75">Custom Expense Amount ({expensePeriodLabel})</span>
-                  <input
-                    className="rounded border p-2"
-                    type="number"
-                    value={fromAnnualExpense(item.annual)}
-                    onChange={(event) => handleCustomExpenseChange(index, { annual: Number(event.target.value) || 0 })}
-                    title={`Custom ${expensePeriodLabel.toLowerCase()} expense amount`}
-                  />
-                </label>
-                </div>
+            {state.expenses.custom.length > 0 ? (
+              <div className="overflow-x-auto rounded border border-token-ink/15">
+                <table className="min-w-full border-collapse text-sm">
+                  <thead className="bg-token-mist/70">
+                    <tr>
+                      <th className="border-b border-token-ink/15 px-3 py-2 text-left text-xs font-semibold text-token-ink/70">Name</th>
+                      <th className="border-b border-token-ink/15 px-3 py-2 text-left text-xs font-semibold text-token-ink/70">Amount ({expensePeriodLabel})</th>
+                      <th className="border-b border-token-ink/15 px-3 py-2 text-center text-xs font-semibold text-token-ink/70">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {state.expenses.custom.map((item, index) => (
+                      <tr key={item.id} className="border-b border-token-ink/10 last:border-b-0">
+                        <td className="px-3 py-2" title="Name this custom expense item.">
+                          <input
+                            className="w-full rounded border p-2"
+                            value={item.label}
+                            onChange={(event) => handleCustomExpenseChange(index, { label: event.target.value })}
+                            title="Custom expense name"
+                          />
+                        </td>
+                        <td className="px-3 py-2" title={`Enter the custom expense amount per ${expensePeriodLabel.toLowerCase()}.`}>
+                          <input
+                            className="w-full rounded border p-2"
+                            type="number"
+                            value={fromAnnualExpense(item.annual)}
+                            onChange={(event) => handleCustomExpenseChange(index, { annual: Number(event.target.value) || 0 })}
+                            title={`Custom ${expensePeriodLabel.toLowerCase()} expense amount`}
+                          />
+                        </td>
+                        <td className="px-3 py-2 text-center">
+                          <DeleteIconButton
+                            label="Remove custom expense"
+                            onClick={() =>
+                              setState((prev) => ({
+                                ...prev,
+                                expenses: {
+                                  ...prev.expenses,
+                                  custom: prev.expenses.custom.filter((_, i) => i !== index)
+                                }
+                              }))
+                            }
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            ))}
+            ) : null}
             <PrimaryButton
               className="bg-token-expenses"
               onClick={() =>
@@ -788,11 +826,14 @@ export const Dashboard = () => {
             </PrimaryButton>
           </div>
         </div>
+        ) : null}
 
+        {isLoanTab || isLendingTab ? (
         <div className="panel space-y-4 p-4 md:p-6">
-          <h2 className="text-2xl font-bold text-token-risk">Loan and Scenario Settings</h2>
+          <h2 className="text-2xl font-bold text-token-risk">{isLoanTab ? "Loan Details" : "Lending Power Scenarios"}</h2>
+          {isLoanTab ? (
           <div className="grid gap-3 md:grid-cols-2">
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title="Select repayment type: Principal & Interest = repay balance and interest, Interest Only = pay interest only during IO period.">
               <span className="block text-xs font-semibold text-token-ink/75">Repayment Type</span>
               <select
                 className="rounded border p-2"
@@ -809,7 +850,7 @@ export const Dashboard = () => {
                 <option value="io">Interest Only</option>
               </select>
             </label>
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title="Enter the loan term in years.">
               <span className="block text-xs font-semibold text-token-ink/75">Loan Term (Years)</span>
               <input
                 className="rounded border p-2"
@@ -824,7 +865,7 @@ export const Dashboard = () => {
                 title="Loan term in years"
               />
             </label>
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title="Enter the nominal annual interest rate.">
               <span className="block text-xs font-semibold text-token-ink/75">Nominal Interest Rate</span>
               <input
                 className="rounded border p-2"
@@ -840,7 +881,7 @@ export const Dashboard = () => {
                 title="Nominal interest rate"
               />
             </label>
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title="Minimum assessment rate used by lenders.">
               <span className="block text-xs font-semibold text-token-ink/75">Assessment Rate Floor</span>
               <input
                 className="rounded border p-2"
@@ -856,7 +897,7 @@ export const Dashboard = () => {
                 title="Assessment rate floor"
               />
             </label>
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title="Offset account balance applied to interest calculations.">
               <span className="block text-xs font-semibold text-token-ink/75">Offset Account Balance</span>
               <input
                 className="rounded border p-2"
@@ -871,7 +912,7 @@ export const Dashboard = () => {
                 title="Offset account balance"
               />
             </label>
-            <label className="space-y-1 text-sm">
+            <label className="space-y-1 text-sm" title="Additional monthly repayment amount.">
               <span className="block text-xs font-semibold text-token-ink/75">Extra Repayment (Monthly)</span>
               <input
                 className="rounded border p-2"
@@ -887,6 +928,8 @@ export const Dashboard = () => {
               />
             </label>
           </div>
+          ) : null}
+          {isLendingTab ? (
           <div className="space-y-2">
             {state.scenarios.length === 0 ? <p className="text-sm text-token-ink/70">No scenarios yet. Add a scenario to compare outcomes.</p> : null}
             {state.scenarios.map((scenario, index) => (
@@ -906,7 +949,7 @@ export const Dashboard = () => {
                     />
                   }
                 />
-                <label className="space-y-1 text-sm">
+                <label className="space-y-1 text-sm" title="Name this lending scenario.">
                   <span className="block text-xs font-semibold text-token-ink/75">Scenario Name</span>
                   <input
                     className="rounded border p-2"
@@ -915,7 +958,7 @@ export const Dashboard = () => {
                     title="Scenario label"
                   />
                 </label>
-                <label className="space-y-1 text-sm">
+                <label className="space-y-1 text-sm" title="Choose a bank profile preset to apply that lender's servicing assumptions, or select No bank preset to use your custom scenario settings.">
                   <span className="block text-xs font-semibold text-token-ink/75">Bank Profile Preset</span>
                   <select
                     className="rounded border p-2"
@@ -931,7 +974,7 @@ export const Dashboard = () => {
                     ))}
                   </select>
                 </label>
-                <label className="flex items-center gap-2 text-sm">
+                <label className="flex items-center gap-2 text-sm" title="Keep assets options: enabled = include current assets/equity in this scenario, disabled = ignore existing assets.">
                   <input
                     type="checkbox"
                     checked={scenario.keepAssets ?? true}
@@ -940,7 +983,7 @@ export const Dashboard = () => {
                   />
                   Keep assets
                 </label>
-                <label className="space-y-1 text-sm">
+                <label className="space-y-1 text-sm" title="Income recognition factor for this scenario.">
                   <span className="block text-xs font-semibold text-token-ink/75">Income Shading Factor</span>
                   <input
                     className="rounded border p-2"
@@ -951,7 +994,7 @@ export const Dashboard = () => {
                     title="Scenario income shading"
                   />
                 </label>
-                <label className="space-y-1 text-sm">
+                <label className="space-y-1 text-sm" title="Rental income recognition factor for this scenario.">
                   <span className="block text-xs font-semibold text-token-ink/75">Rental Shading Factor</span>
                   <input
                     className="rounded border p-2"
@@ -962,7 +1005,7 @@ export const Dashboard = () => {
                     title="Scenario rental shading"
                   />
                 </label>
-                <label className="space-y-1 text-sm">
+                <label className="space-y-1 text-sm" title="Expense uplift factor for this scenario.">
                   <span className="block text-xs font-semibold text-token-ink/75">Expense Loading Factor</span>
                   <input
                     className="rounded border p-2"
@@ -997,9 +1040,12 @@ export const Dashboard = () => {
               Add scenario
             </PrimaryButton>
           </div>
+          ) : null}
         </div>
+        ) : null}
       </section>
 
+      {isLendingTab ? (
       <section className="grid gap-4 md:grid-cols-4">
         {scenarioResults.map((result) => (
           <article key={result.scenarioLabel} className="panel p-4">
@@ -1013,7 +1059,9 @@ export const Dashboard = () => {
           </article>
         ))}
       </section>
+      ) : null}
 
+      {isChartsTab ? (
       <section className="grid gap-6 lg:grid-cols-2">
         <div className="panel h-[320px] p-4 md:p-6">
           <h3 className="mb-3 text-lg font-semibold">Borrowing Power Comparison</h3>
@@ -1090,8 +1138,9 @@ export const Dashboard = () => {
           </ResponsiveContainer>
         </div>
       </section>
+      ) : null}
 
-      {primaryScenario ? (
+      {isChartsTab && primaryScenario ? (
         <section className="panel h-[360px] p-4 md:p-6">
           <h3 className="mb-3 text-lg font-semibold">Offset Effectiveness vs Extra Repayments</h3>
           <ResponsiveContainer width="100%" height="90%">
@@ -1114,13 +1163,6 @@ export const Dashboard = () => {
         </section>
       ) : null}
 
-      <section className="rounded border border-token-risk/25 bg-token-risk/5 p-4 text-sm">
-        <p className="font-semibold">Privacy:</p>
-        <p>All calculations happen locally in your browser. No data is transmitted, stored, or tracked.</p>
-        <p className="mt-2 font-semibold">Disclaimer:</p>
-        <p>This calculator provides general information only and does not constitute financial advice.</p>
-      </section>
-
       </div>
 
       <aside className="hidden xl:block no-print">
@@ -1128,6 +1170,14 @@ export const Dashboard = () => {
           <AdSlot />
         </div>
       </aside>
+
+      {isHydrated && !hasAcceptedLegal ? (
+        <LegalAcceptanceModal
+          onAccept={() => {
+            setHasAcceptedLegal(true);
+          }}
+        />
+      ) : null}
     </div>
   );
 };
