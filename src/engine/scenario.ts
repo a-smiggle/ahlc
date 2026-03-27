@@ -12,6 +12,7 @@ import type {
   ScenarioResult,
   ServiceabilityBreakdown
 } from "@/types/models";
+import type { BankProfile } from "@/config/assumptions";
 
 const round = (value: number): number => Math.round(value * 100) / 100;
 
@@ -159,19 +160,26 @@ const buildCashflowTrajectory = (
   }));
 };
 
-export const calculateScenario = (state: AppState, scenario: ScenarioOverrides): ScenarioResult => {
-  const profile = findBankProfile(scenario.bankProfileId);
+export const calculateScenario = (
+  state: AppState,
+  scenario: ScenarioOverrides,
+  bankProfiles: BankProfile[] = assumptions.bankProfiles
+): ScenarioResult => {
+  const profile = scenario.bankProfileId
+    ? bankProfiles.find((candidate) => candidate.id === scenario.bankProfileId) ?? findBankProfile(scenario.bankProfileId)
+    : undefined;
   const incomeShading =
-    scenario.incomeShading ?? profile?.variableIncomeShading ?? assumptions.defaultVariableIncomeShading;
+    scenario.variableIncomeShading ?? scenario.incomeShading ?? profile?.variableIncomeShading ?? assumptions.defaultVariableIncomeShading;
   const rentalShading = scenario.rentalShading ?? profile?.rentalShading ?? assumptions.defaultRentalShading;
   const expenseLoading = scenario.expenseLoading ?? profile?.expenseLoading ?? assumptions.defaultExpenseLoading;
   const keepAssets = scenario.keepAssets ?? true;
+  const nominalRate = scenario.indicativeVariableRate ?? state.loanSettings.nominalRate;
 
   const assessmentBuffer =
     scenario.assessmentBuffer ?? profile?.assessmentBuffer ?? state.loanSettings.assessmentRateBuffer;
 
   const effectiveAssessmentRate = Math.max(
-    state.loanSettings.nominalRate + assessmentBuffer,
+    nominalRate + assessmentBuffer,
     state.loanSettings.assessmentRateFloor
   );
 
@@ -213,7 +221,7 @@ export const calculateScenario = (state: AppState, scenario: ScenarioOverrides):
 
   const debtMonthly = monthlyRepayment(
     borrowingPower,
-    state.loanSettings.nominalRate,
+    nominalRate,
     state.loanSettings.termYears,
     state.loanSettings.repaymentType
   );
@@ -253,14 +261,14 @@ export const calculateScenario = (state: AppState, scenario: ScenarioOverrides):
     rateSensitivity,
     debtTrajectory: buildDebtTrajectory(
       borrowingPower,
-      state.loanSettings.nominalRate,
+      nominalRate,
       state.loanSettings.termYears,
       assumptions.maxBorrowLvr
     ),
     cashflowTrajectory: buildCashflowTrajectory(totalNetAssessable, shadedExpenses, debtMonthly * 12),
     offsetVsExtra: buildOffsetVsExtra(
       borrowingPower,
-      state.loanSettings.nominalRate,
+      nominalRate,
       state.loanSettings.termYears,
       state.loanSettings.offsetBalance,
       state.loanSettings.extraRepaymentMonthly
@@ -268,9 +276,12 @@ export const calculateScenario = (state: AppState, scenario: ScenarioOverrides):
   };
 };
 
-export const calculateAllScenarios = (state: AppState): CalculationOutput => {
+export const calculateAllScenarios = (
+  state: AppState,
+  bankProfiles: BankProfile[] = assumptions.bankProfiles
+): CalculationOutput => {
   return {
-    scenarioResults: state.scenarios.map((scenario) => calculateScenario(state, scenario)),
+    scenarioResults: state.scenarios.map((scenario) => calculateScenario(state, scenario, bankProfiles)),
     generatedAtIso: new Date().toISOString()
   };
 };

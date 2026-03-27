@@ -1,0 +1,1183 @@
+{
+  "metadata": {
+    "datasetVersion": "2026.03.27.11",
+    "updatedAtIso": "2026-03-27T04:02:33.569Z",
+    "source": "scheduled-refresh",
+    "realWorldBankData": {
+      "attempted": true,
+      "successfulSources": 3,
+      "failedSources": 118,
+      "successful": [
+        {
+          "id": "bank-australia",
+          "label": "Bank Australia",
+          "url": "https://public.cdr.bankaust.com.au/cds-au/v1/banking/products",
+          "observedVariableRate": 0.0538,
+          "productDetailsAttempted": 15,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "macquarie-bank-limited",
+          "label": "Macquarie Bank Limited",
+          "url": "https://api.macquariebank.io/cds-au/v1/banking/products",
+          "observedVariableRate": 0.0559,
+          "productDetailsAttempted": 3,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "qudos-bank",
+          "label": "Qudos Bank",
+          "url": "https://public.cdr.qudosbank.com.au/cds-au/v1/banking/products",
+          "observedVariableRate": 0.0544,
+          "productDetailsAttempted": 8,
+          "productDetailsFailed": 0
+        }
+      ],
+      "failed": [
+        {
+          "id": "afg-home-loans-alpha",
+          "label": "AFG Home Loans Alpha",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.afg.app.bendigobank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 2,
+          "productDetailsFailed": 2
+        },
+        {
+          "id": "amp-my-amp",
+          "label": "AMP - My AMP",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.cdr-api.amp.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 5,
+          "productDetailsFailed": 5
+        },
+        {
+          "id": "amp-bank-go",
+          "label": "AMP Bank GO",
+          "reason": "no-mortgage-rates",
+          "url": "https://pub.cdr-sme.amp.com.au/api/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "anz",
+          "label": "ANZ",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.anz/cds-au/v1/banking/products",
+          "productDetailsAttempted": 3,
+          "productDetailsFailed": 3
+        },
+        {
+          "id": "anz-plus",
+          "label": "ANZ Plus",
+          "reason": "no-mortgage-rates",
+          "url": "https://cdr.apix.anz/cds-au/v1/banking/products",
+          "productDetailsAttempted": 1,
+          "productDetailsFailed": 1
+        },
+        {
+          "id": "alex-bank",
+          "label": "Alex.Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.alex.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "arab-bank-australia-limited",
+          "label": "Arab Bank Australia Limited",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.arabbank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 11,
+          "productDetailsFailed": 11
+        },
+        {
+          "id": "aussie-elevate",
+          "label": "Aussie Elevate",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.aussie.app.bendigobank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 2,
+          "productDetailsFailed": 2
+        },
+        {
+          "id": "aussie-home-loans",
+          "label": "Aussie Home Loans",
+          "reason": "all-endpoints-failed: https://aussie.openportal.com.au/cds-au/v1/banking/products => header-variants-failed: HTTP 404 | HTTP 404 | HTTP 404 | HTTP 404 | https://aussie.openportal.com.au/cds-au/v1/products => header-variants-failed: HTTP 404 | HTTP 404 | HTTP 404 | HTTP 404"
+        },
+        {
+          "id": "australian-military-bank",
+          "label": "Australian Military Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 7,
+          "productDetailsFailed": 7
+        },
+        {
+          "id": "australian-mutual-bank-ltd",
+          "label": "Australian Mutual Bank LTD",
+          "reason": "no-mortgage-rates",
+          "url": "https://internetbanking.australianmutual.bank/openbanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 20,
+          "productDetailsFailed": 20
+        },
+        {
+          "id": "auswide-bank-ltd",
+          "label": "Auswide Bank Ltd",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.auswidebank.com.au/openbanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 3,
+          "productDetailsFailed": 3
+        },
+        {
+          "id": "bcu-bank",
+          "label": "BCU Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr-api.bcu.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 13,
+          "productDetailsFailed": 13
+        },
+        {
+          "id": "bnk-bank-goldfields-money-bchl",
+          "label": "BNK Bank (Goldfields Money/BCHL)",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.bnk.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 2,
+          "productDetailsFailed": 2
+        },
+        {
+          "id": "boq-specialist",
+          "label": "BOQ Specialist",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.cds.boqspecialist.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 3,
+          "productDetailsFailed": 3
+        },
+        {
+          "id": "bank-first",
+          "label": "Bank First",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.bankfirst.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 9,
+          "productDetailsFailed": 9
+        },
+        {
+          "id": "bank-of-china",
+          "label": "Bank of China",
+          "reason": "no-mortgage-rates",
+          "url": "https://api-gateway.bankofchina.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 14,
+          "productDetailsFailed": 14
+        },
+        {
+          "id": "bank-of-melbourne",
+          "label": "Bank of Melbourne",
+          "reason": "no-mortgage-rates",
+          "url": "https://digital-api.bankofmelbourne.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 2,
+          "productDetailsFailed": 2
+        },
+        {
+          "id": "bank-of-queensland-limited",
+          "label": "Bank of Queensland Limited",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.cds.boq.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 3,
+          "productDetailsFailed": 3
+        },
+        {
+          "id": "bank-of-sydney",
+          "label": "Bank of Sydney",
+          "reason": "no-mortgage-rates",
+          "url": "https://openbank.api.banksyd.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 8,
+          "productDetailsFailed": 8
+        },
+        {
+          "id": "bank-of-us",
+          "label": "Bank of us",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.bankofus.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 7,
+          "productDetailsFailed": 7
+        },
+        {
+          "id": "banksa",
+          "label": "BankSA",
+          "reason": "no-mortgage-rates",
+          "url": "https://digital-api.banksa.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 4,
+          "productDetailsFailed": 4
+        },
+        {
+          "id": "bankvic",
+          "label": "BankVic",
+          "reason": "no-mortgage-rates",
+          "url": "https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 7,
+          "productDetailsFailed": 7
+        },
+        {
+          "id": "bankwest",
+          "label": "Bankwest",
+          "reason": "no-mortgage-rates",
+          "url": "https://open-api.bankwest.com.au/bwpublic/cds-au/v1/banking/products",
+          "productDetailsAttempted": 4,
+          "productDetailsFailed": 4
+        },
+        {
+          "id": "bendigo-bank",
+          "label": "Bendigo Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 5,
+          "productDetailsFailed": 5
+        },
+        {
+          "id": "beyond-bank-australia",
+          "label": "Beyond Bank Australia",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 7,
+          "productDetailsFailed": 7
+        },
+        {
+          "id": "border-bank",
+          "label": "Border Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.prd.borderbank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 3,
+          "productDetailsFailed": 3
+        },
+        {
+          "id": "broken-hill-bank",
+          "label": "Broken Hill Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr-api.bhccu.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 9,
+          "productDetailsFailed": 9
+        },
+        {
+          "id": "cba-commbiz",
+          "label": "CBA - CommBiz",
+          "reason": "no-mortgage-rates",
+          "url": "https://cdr.commbiz.api.commbank.com.au/cbzpublic/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "cairns-bank",
+          "label": "Cairns bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://openbanking.cairnsbank.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 20,
+          "productDetailsFailed": 20
+        },
+        {
+          "id": "central-murray-bank",
+          "label": "Central Murray Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://secure.centralmurray.bank/openbanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 11,
+          "productDetailsFailed": 11
+        },
+        {
+          "id": "central-west-cul",
+          "label": "Central West CUL",
+          "reason": "no-mortgage-rates",
+          "url": "https://ib.cwcu.com.au/openbanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 5,
+          "productDetailsFailed": 5
+        },
+        {
+          "id": "coastline-bank",
+          "label": "Coastline Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr-api.coastline.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "coles-credit-cards",
+          "label": "Coles Credit Cards",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.openbanking.secure.coles.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "commbank",
+          "label": "CommBank",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.commbank.com.au/public/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "commfcu",
+          "label": "CommFCU",
+          "reason": "no-mortgage-rates",
+          "url": "https://netbank.communityfirst.com.au/cf-OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 20,
+          "productDetailsFailed": 20
+        },
+        {
+          "id": "connective-select",
+          "label": "Connective Select",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.connective.app.bendigobank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 2,
+          "productDetailsFailed": 2
+        },
+        {
+          "id": "credit-union-sa",
+          "label": "Credit Union SA",
+          "reason": "no-mortgage-rates",
+          "url": "https://openbanking.api.creditunionsa.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 15,
+          "productDetailsFailed": 15
+        },
+        {
+          "id": "ddh-graham",
+          "label": "DDH Graham",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.cds.ddhgraham.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "darling-downs-bank",
+          "label": "Darling Downs Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://openbanking.ddbank.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 20,
+          "productDetailsFailed": 20
+        },
+        {
+          "id": "defence-bank",
+          "label": "Defence Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://product.defencebank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 17,
+          "productDetailsFailed": 17
+        },
+        {
+          "id": "dnister",
+          "label": "Dnister",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr-api.dnister.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 3,
+          "productDetailsFailed": 3
+        },
+        {
+          "id": "easy-street",
+          "label": "Easy Street",
+          "reason": "no-mortgage-rates",
+          "url": "https://ebranch.easystreet.com.au/es-OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 13,
+          "productDetailsFailed": 13
+        },
+        {
+          "id": "family-first",
+          "label": "Family First",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.familyfirst.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 10,
+          "productDetailsFailed": 10
+        },
+        {
+          "id": "fire-service-credit-union",
+          "label": "Fire Service Credit Union",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr-api.fscu.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 4,
+          "productDetailsFailed": 4
+        },
+        {
+          "id": "firefighters-mutual-bank",
+          "label": "Firefighters Mutual Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://ob.tmbl.com.au/fmbank/cds-au/v1/banking/products",
+          "productDetailsAttempted": 16,
+          "productDetailsFailed": 16
+        },
+        {
+          "id": "first-option-bank",
+          "label": "First Option Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://internetbanking.firstoption.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 2,
+          "productDetailsFailed": 2
+        },
+        {
+          "id": "g-c-mutual-bank",
+          "label": "G&C Mutual Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://ibank.gcmutualbank.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 20,
+          "productDetailsFailed": 20
+        },
+        {
+          "id": "gateway-bank",
+          "label": "Gateway Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr-api.gatewaybank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 7,
+          "productDetailsFailed": 7
+        },
+        {
+          "id": "geelong-bank",
+          "label": "Geelong Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://online.geelongbank.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 16,
+          "productDetailsFailed": 16
+        },
+        {
+          "id": "great-southern-bank",
+          "label": "Great Southern Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 20,
+          "productDetailsFailed": 20
+        },
+        {
+          "id": "great-southern-bank-business",
+          "label": "Great Southern Bank Business+",
+          "reason": "no-mortgage-rates",
+          "url": "https://od1.open-banking.business.greatsouthernbank.com.au/api/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "greater-bank-limited",
+          "label": "Greater Bank Limited",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.greater.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "hsbc",
+          "label": "HSBC",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.ob.hsbc.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 19,
+          "productDetailsFailed": 19
+        },
+        {
+          "id": "hsbc-bank-australia-limited-wholesale-banking",
+          "label": "HSBC Bank Australia Limited – Wholesale Banking",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.ob.business.hsbc.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "health-professionals-bank",
+          "label": "Health Professionals Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://ob.tmbl.com.au/hpbank/cds-au/v1/banking/products",
+          "productDetailsAttempted": 16,
+          "productDetailsFailed": 16
+        },
+        {
+          "id": "heartland",
+          "label": "Heartland",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.cdr.heartlandbank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "horizon-bank",
+          "label": "Horizon Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://onlinebanking.horizonbank.com.au/openbanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 20,
+          "productDetailsFailed": 20
+        },
+        {
+          "id": "hume-bank",
+          "label": "Hume Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://ibankob.humebank.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 6,
+          "productDetailsFailed": 6
+        },
+        {
+          "id": "imb-bank",
+          "label": "IMB Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://openbank.openbanking.imb.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 8,
+          "productDetailsFailed": 8
+        },
+        {
+          "id": "ing-bank-australia-ltd",
+          "label": "ING BANK (Australia) Ltd",
+          "reason": "no-mortgage-rates",
+          "url": "https://id.ob.ing.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 3,
+          "productDetailsFailed": 3
+        },
+        {
+          "id": "judo-bank",
+          "label": "Judo Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.open.judo.bank/cds-au/v1/banking/products",
+          "productDetailsAttempted": 1,
+          "productDetailsFailed": 1
+        },
+        {
+          "id": "kogan-money-credit-cards",
+          "label": "Kogan Money Credit Cards",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.openbanking.cards.koganmoney.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "laboratories-credit-union",
+          "label": "Laboratories Credit Union",
+          "reason": "no-mortgage-rates",
+          "url": "https://internetbanking.lcu.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 14,
+          "productDetailsFailed": 14
+        },
+        {
+          "id": "liberty-financial",
+          "label": "Liberty Financial",
+          "reason": "no-mortgage-rates",
+          "url": "https://services.liberty.com.au/api/data-holder-public/cds-au/v1/banking/products",
+          "productDetailsAttempted": 10,
+          "productDetailsFailed": 10
+        },
+        {
+          "id": "me-bank",
+          "label": "ME Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.openbank.mebank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "me-bank-me-go",
+          "label": "ME Bank - ME Go",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.cds.mebank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 2,
+          "productDetailsFailed": 2
+        },
+        {
+          "id": "move-bank",
+          "label": "MOVE Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://openbanking.movebank.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 8,
+          "productDetailsFailed": 8
+        },
+        {
+          "id": "maitland-mutual-limited",
+          "label": "Maitland Mutual Limited",
+          "reason": "no-mortgage-rates",
+          "url": "https://openbanking.themutual.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 4,
+          "productDetailsFailed": 4
+        },
+        {
+          "id": "mycard",
+          "label": "MyCard",
+          "reason": "no-mortgage-rates",
+          "url": "https://api-openbanking.secure.mycard.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "mystate-bank",
+          "label": "MyState Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.mystate.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 4,
+          "productDetailsFailed": 4
+        },
+        {
+          "id": "national-australia-bank",
+          "label": "NATIONAL AUSTRALIA BANK",
+          "reason": "no-mortgage-rates",
+          "url": "https://openbank.api.nab.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 4,
+          "productDetailsFailed": 4
+        },
+        {
+          "id": "nrma-home-loans",
+          "label": "NRMA Home Loans",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.nrma.app.bendigobank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 2,
+          "productDetailsFailed": 2
+        },
+        {
+          "id": "newcastle-permanent-building-society",
+          "label": "Newcastle Permanent Building Society",
+          "reason": "no-mortgage-rates",
+          "url": "https://openbank.newcastlepermanent.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 15,
+          "productDetailsFailed": 15
+        },
+        {
+          "id": "northern-inland-credit-union-limited",
+          "label": "Northern Inland Credit Union Limited",
+          "reason": "no-mortgage-rates",
+          "url": "https://secure.nicu.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 16,
+          "productDetailsFailed": 16
+        },
+        {
+          "id": "orange-credit-union-ltd",
+          "label": "ORANGE CREDIT UNION LTD",
+          "reason": "no-mortgage-rates",
+          "url": "https://online.orangecu.com.au/openbanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 14,
+          "productDetailsFailed": 14
+        },
+        {
+          "id": "p-n-bank",
+          "label": "P&N Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr-api.pnbank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 19,
+          "productDetailsFailed": 19
+        },
+        {
+          "id": "paypal-australia",
+          "label": "PayPal Australia",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.paypal.com/v1/identity/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "people-s-choice-and-heritage",
+          "label": "People's Choice and Heritage",
+          "reason": "no-mortgage-rates",
+          "url": "https://ob-public.peopleschoice.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 5,
+          "productDetailsFailed": 5
+        },
+        {
+          "id": "police-bank",
+          "label": "Police Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.prd.policebank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 4,
+          "productDetailsFailed": 4
+        },
+        {
+          "id": "police-credit-union-ltd",
+          "label": "Police Credit Union Ltd",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.policecu.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 20,
+          "productDetailsFailed": 20
+        },
+        {
+          "id": "qbank",
+          "label": "QBANK",
+          "reason": "no-mortgage-rates",
+          "url": "https://banking.qbank.com.au/openbanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 7,
+          "productDetailsFailed": 7
+        },
+        {
+          "id": "qantas-money-credit-cards",
+          "label": "Qantas Money Credit Cards",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.openbanking.qantasmoney.com/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "qantas-money-home-loans",
+          "label": "Qantas Money Home Loans",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.qantas.app.bendigobank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 2,
+          "productDetailsFailed": 2
+        },
+        {
+          "id": "queensland-country-bank",
+          "label": "Queensland Country Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr-api.queenslandcountry.bank/cds-au/v1/banking/products",
+          "productDetailsAttempted": 4,
+          "productDetailsFailed": 4
+        },
+        {
+          "id": "racq-bank",
+          "label": "RACQ Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://cdrbank.racq.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 17,
+          "productDetailsFailed": 17
+        },
+        {
+          "id": "rams-financial-group-pty-ltd",
+          "label": "RAMS Financial Group Pty Ltd",
+          "reason": "all-endpoints-failed: https://digital-api.westpac.com.au/rams/cds-au/v1/banking/products => header-variants-failed: HTTP 404 | HTTP 404 | HTTP 404 | HTTP 404 | https://digital-api.westpac.com.au/rams/cds-au/v1/products => header-variants-failed: HTTP 404 | HTTP 404 | HTTP 404 | HTTP 404"
+        },
+        {
+          "id": "rsl-money",
+          "label": "RSL Money",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.open.rslmoney.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "rabobank",
+          "label": "Rabobank",
+          "reason": "no-mortgage-rates",
+          "url": "https://openbanking.api.rabobank.com.au/public/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "regional-australia-bank",
+          "label": "Regional Australia Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public-data.cdr.regaustbank.io/cds-au/v1/banking/products",
+          "productDetailsAttempted": 4,
+          "productDetailsFailed": 4
+        },
+        {
+          "id": "reliance-bank",
+          "label": "Reliance Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://ibanking.reliancebank.com.au/rel-openbanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 20,
+          "productDetailsFailed": 20
+        },
+        {
+          "id": "swsbank",
+          "label": "SWSbank",
+          "reason": "no-mortgage-rates",
+          "url": "https://online.swsbank.com.au/openbanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 13,
+          "productDetailsFailed": 13
+        },
+        {
+          "id": "solo-by-myob",
+          "label": "Solo by MYOB",
+          "reason": "no-mortgage-rates",
+          "url": "https://od1.open-banking.myob.greatsouthernbank.com.au/api/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "southern-cross-credit-union",
+          "label": "Southern Cross Credit Union",
+          "reason": "no-mortgage-rates",
+          "url": "https://cdr.sccu.com.au/openbanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 7,
+          "productDetailsFailed": 7
+        },
+        {
+          "id": "st-george-bank",
+          "label": "St.George Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://digital-api.stgeorge.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 3,
+          "productDetailsFailed": 3
+        },
+        {
+          "id": "summerland-bank",
+          "label": "Summerland Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr-api.summerland.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 8,
+          "productDetailsFailed": 8
+        },
+        {
+          "id": "suncorp-bank",
+          "label": "Suncorp Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://id-ob.suncorpbank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 8,
+          "productDetailsFailed": 8
+        },
+        {
+          "id": "tmcu",
+          "label": "TMCU",
+          "reason": "no-mortgage-rates",
+          "url": "https://banking.transportmutual.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 12,
+          "productDetailsFailed": 12
+        },
+        {
+          "id": "teachers-mutual-bank",
+          "label": "Teachers Mutual Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://ob.tmbl.com.au/tmbank/cds-au/v1/banking/products",
+          "productDetailsAttempted": 16,
+          "productDetailsFailed": 16
+        },
+        {
+          "id": "the-capricornian",
+          "label": "The Capricornian",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.onlinebanking.capricornian.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 8,
+          "productDetailsFailed": 8
+        },
+        {
+          "id": "the-mac",
+          "label": "The Mac",
+          "reason": "no-mortgage-rates",
+          "url": "https://onlinebanking.themaccu.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 17,
+          "productDetailsFailed": 17
+        },
+        {
+          "id": "thriday",
+          "label": "Thriday",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.thriday.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "tiimely-home",
+          "label": "Tiimely Home",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.tiimely.app.bendigobank.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 2,
+          "productDetailsFailed": 2
+        },
+        {
+          "id": "traditional-credit-union",
+          "label": "Traditional Credit Union",
+          "reason": "no-mortgage-rates",
+          "url": "https://prd.tcu.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "tyro-banking",
+          "label": "Tyro Banking",
+          "reason": "no-mortgage-rates",
+          "url": "https://od1.cdr.banking.tyro.com/api/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "tyro-payments",
+          "label": "Tyro Payments",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr.tyro.com/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "ubank",
+          "label": "UBank",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.cdr-api.86400.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 11,
+          "productDetailsFailed": 11
+        },
+        {
+          "id": "unibank",
+          "label": "UniBank",
+          "reason": "no-mortgage-rates",
+          "url": "https://ob.tmbl.com.au/unibank/cds-au/v1/banking/products",
+          "productDetailsAttempted": 16,
+          "productDetailsFailed": 16
+        },
+        {
+          "id": "unity-bank",
+          "label": "Unity Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://ibanking.unitybank.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 20,
+          "productDetailsFailed": 20
+        },
+        {
+          "id": "unloan",
+          "label": "Unloan",
+          "reason": "no-mortgage-rates",
+          "url": "https://public.api.cdr.unloan.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 1,
+          "productDetailsFailed": 1
+        },
+        {
+          "id": "up",
+          "label": "Up",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.up.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 1,
+          "productDetailsFailed": 1
+        },
+        {
+          "id": "virgin-money",
+          "label": "Virgin Money",
+          "reason": "no-mortgage-rates",
+          "url": "https://api.cds.virginmoney.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 2,
+          "productDetailsFailed": 2
+        },
+        {
+          "id": "westpac",
+          "label": "Westpac",
+          "reason": "no-mortgage-rates",
+          "url": "https://digital-api.westpac.com.au/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "wise",
+          "label": "Wise",
+          "reason": "no-mortgage-rates",
+          "url": "https://au-cdrbanking-pub.wise.com/cds-au/v1/banking/products",
+          "productDetailsAttempted": 0,
+          "productDetailsFailed": 0
+        },
+        {
+          "id": "woolworths-team-bank",
+          "label": "Woolworths Team Bank",
+          "reason": "no-mortgage-rates",
+          "url": "https://online.woolworthsteambank.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 7,
+          "productDetailsFailed": 7
+        },
+        {
+          "id": "bankwaw",
+          "label": "bankWAW",
+          "reason": "no-mortgage-rates",
+          "url": "https://onlinebanking.wawcu.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 6,
+          "productDetailsFailed": 6
+        },
+        {
+          "id": "gmcu",
+          "label": "gmcu",
+          "reason": "no-mortgage-rates",
+          "url": "https://secure.gmcu.com.au/OpenBanking/cds-au/v1/banking/products",
+          "productDetailsAttempted": 6,
+          "productDetailsFailed": 6
+        },
+        {
+          "id": "in1bank-ltd",
+          "label": "in1bank ltd.",
+          "reason": "all-endpoints-failed: https://cdr.in1bank.com.au/cds-au/v1/banking/products => header-variants-failed: HTTP 406 | HTTP 406 | HTTP 406 | HTTP 406 | https://cdr.in1bank.com.au/cds-au/v1/products => header-variants-failed: HTTP 403 | HTTP 403 | HTTP 403 | HTTP 403"
+        }
+      ]
+    }
+  },
+  "medicareLevyRate": 0.02,
+  "residentTaxBrackets": [
+    {
+      "threshold": 0,
+      "baseTax": 0,
+      "rate": 0
+    },
+    {
+      "threshold": 18200,
+      "baseTax": 0,
+      "rate": 0.16
+    },
+    {
+      "threshold": 45000,
+      "baseTax": 4288,
+      "rate": 0.3
+    },
+    {
+      "threshold": 135000,
+      "baseTax": 31288,
+      "rate": 0.37
+    },
+    {
+      "threshold": 190000,
+      "baseTax": 51638,
+      "rate": 0.45
+    }
+  ],
+  "hecsBrackets": [
+    {
+      "threshold": 54800,
+      "rate": 0.01
+    },
+    {
+      "threshold": 63090,
+      "rate": 0.025
+    },
+    {
+      "threshold": 66876,
+      "rate": 0.03
+    },
+    {
+      "threshold": 70909,
+      "rate": 0.035
+    },
+    {
+      "threshold": 75244,
+      "rate": 0.04
+    },
+    {
+      "threshold": 79831,
+      "rate": 0.045
+    },
+    {
+      "threshold": 84720,
+      "rate": 0.05
+    },
+    {
+      "threshold": 89934,
+      "rate": 0.055
+    },
+    {
+      "threshold": 95457,
+      "rate": 0.06
+    },
+    {
+      "threshold": 101328,
+      "rate": 0.065
+    },
+    {
+      "threshold": 107676,
+      "rate": 0.07
+    },
+    {
+      "threshold": 114525,
+      "rate": 0.075
+    },
+    {
+      "threshold": 121896,
+      "rate": 0.08
+    },
+    {
+      "threshold": 129838,
+      "rate": 0.085
+    },
+    {
+      "threshold": 138378,
+      "rate": 0.09
+    },
+    {
+      "threshold": 147540,
+      "rate": 0.095
+    },
+    {
+      "threshold": 157372,
+      "rate": 0.1
+    }
+  ],
+  "hemExpenseFloorAnnual": 42000,
+  "defaultExpenseLoading": 1.1,
+  "defaultVariableIncomeShading": 0.8,
+  "defaultRentalShading": 0.75,
+  "maxBorrowLvr": 0.8,
+  "defaultStressRate": 0.075,
+  "bankProfilesNote": "Indicative only. Rates and serviceability settings are based on publicly available information, APRA requirements, and common Australian lending practices as of March 2026. They do not represent a formal credit assessment by any lender.",
+  "bankProfilesAsOfDate": "2026-03-25",
+  "bankProfiles": [
+    {
+      "id": "cba",
+      "label": "Commonwealth Bank of Australia",
+      "assessmentBuffer": 0.03,
+      "rentalShading": 0.80,
+      "variableIncomeShading": 0.80,
+      "expenseLoading": 1.10,
+      "indicativeVariableRate": 0.057,
+      "notes": "Standard owner-occupied variable P&I, Digi / MAV style products"
+    },
+    {
+      "id": "anz",
+      "label": "ANZ",
+      "assessmentBuffer": 0.03,
+      "rentalShading": 0.80,
+      "variableIncomeShading": 0.80,
+      "expenseLoading": 1.10,
+      "indicativeVariableRate": 0.0585,
+      "notes": "Simplicity Plus / ANZ Plus variable products"
+    },
+    {
+      "id": "nab",
+      "label": "National Australia Bank",
+      "assessmentBuffer": 0.03,
+      "rentalShading": 0.80,
+      "variableIncomeShading": 0.80,
+      "expenseLoading": 1.10,
+      "indicativeVariableRate": 0.061,
+      "notes": "Tailored Home Loan variable products"
+    },
+    {
+      "id": "westpac",
+      "label": "Westpac",
+      "assessmentBuffer": 0.03,
+      "rentalShading": 0.80,
+      "variableIncomeShading": 0.80,
+      "expenseLoading": 1.10,
+      "indicativeVariableRate": 0.059,
+      "notes": "Flexi First / Rocket Repay variable loans"
+    },
+    {
+      "id": "macquarie",
+      "label": "Macquarie Bank",
+      "assessmentBuffer": 0.03,
+      "rentalShading": 0.80,
+      "variableIncomeShading": 0.80,
+      "expenseLoading": 1.10,
+      "indicativeVariableRate": 0.0565,
+      "notes": "Basic / Offset Home Loan variable products"
+    },
+    {
+      "id": "ing",
+      "label": "ING",
+      "assessmentBuffer": 0.03,
+      "rentalShading": 0.80,
+      "variableIncomeShading": 0.80,
+      "expenseLoading": 1.10,
+      "indicativeVariableRate": 0.0565,
+      "notes": "Mortgage Simplifier / Orange Advantage"
+    },
+    {
+      "id": "bendigoadelaide",
+      "label": "Bendigo & Adelaide Bank",
+      "assessmentBuffer": 0.03,
+      "rentalShading": 0.75,
+      "variableIncomeShading": 0.80,
+      "expenseLoading": 1.10,
+      "indicativeVariableRate": 0.0565,
+      "notes": "More conservative rental shading on some products"
+    },
+    {
+      "id": "bank-australia",
+      "label": "Bank Australia",
+      "assessmentBuffer": 0.03,
+      "rentalShading": 0.75,
+      "variableIncomeShading": 0.80,
+      "expenseLoading": 1.12,
+      "indicativeVariableRate": 0.0538,
+      "notes": "CDR live data – public.cdr.bankaust.com.au"
+    },
+    {
+      "id": "macquarie-bank-limited",
+      "label": "Macquarie Bank (CDR)",
+      "assessmentBuffer": 0.03,
+      "rentalShading": 0.80,
+      "variableIncomeShading": 0.80,
+      "expenseLoading": 1.10,
+      "indicativeVariableRate": 0.0559,
+      "notes": "CDR live data – api.macquariebank.io"
+    },
+    {
+      "id": "qudos-bank",
+      "label": "Qudos Bank",
+      "assessmentBuffer": 0.03,
+      "rentalShading": 0.75,
+      "variableIncomeShading": 0.80,
+      "expenseLoading": 1.10,
+      "indicativeVariableRate": 0.0544,
+      "notes": "CDR live data – public.cdr.qudosbank.com.au"
+    }
+  ]
+}

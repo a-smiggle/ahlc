@@ -1,0 +1,1212 @@
+[
+  {
+    "id": "afg-home-loans-alpha",
+    "label": "AFG Home Loans Alpha",
+    "productsUrls": [
+      "https://api.afg.app.bendigobank.com.au/cds-au/v1/banking/products",
+      "https://api.afg.app.bendigobank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.afg.app.bendigobank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "amp-my-amp",
+    "label": "AMP - My AMP",
+    "productsUrls": [
+      "https://api.cdr-api.amp.com.au/cds-au/v1/banking/products",
+      "https://api.cdr-api.amp.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.cdr-api.amp.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "amp-bank-go",
+    "label": "AMP Bank GO",
+    "productsUrls": [
+      "https://pub.cdr-sme.amp.com.au/api/cds-au/v1/banking/products",
+      "https://pub.cdr-sme.amp.com.au/api/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://pub.cdr-sme.amp.com.au/api/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "anz",
+    "label": "ANZ",
+    "productsUrls": [
+      "https://api.anz/cds-au/v1/banking/products",
+      "https://api.anz/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.anz/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "anz-plus",
+    "label": "ANZ Plus",
+    "productsUrls": [
+      "https://cdr.apix.anz/cds-au/v1/banking/products",
+      "https://cdr.apix.anz/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://cdr.apix.anz/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "alex-bank",
+    "label": "Alex.Bank",
+    "productsUrls": [
+      "https://public.cdr.alex.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.alex.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.alex.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "arab-bank-australia-limited",
+    "label": "Arab Bank Australia Limited",
+    "productsUrls": [
+      "https://public.cdr.arabbank.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.arabbank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.arabbank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "aussie-elevate",
+    "label": "Aussie Elevate",
+    "productsUrls": [
+      "https://api.aussie.app.bendigobank.com.au/cds-au/v1/banking/products",
+      "https://api.aussie.app.bendigobank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.aussie.app.bendigobank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "aussie-home-loans",
+    "label": "Aussie Home Loans",
+    "productsUrls": [
+      "https://aussie.openportal.com.au/cds-au/v1/banking/products",
+      "https://aussie.openportal.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://aussie.openportal.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "australian-military-bank",
+    "label": "Australian Military Bank",
+    "productsUrls": [
+      "https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products",
+      "https://public.open.australianmilitarybank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "australian-mutual-bank-ltd",
+    "label": "Australian Mutual Bank LTD",
+    "productsUrls": [
+      "https://internetbanking.australianmutual.bank/openbanking/cds-au/v1/banking/products",
+      "https://internetbanking.australianmutual.bank/openbanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://internetbanking.australianmutual.bank/openbanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "auswide-bank-ltd",
+    "label": "Auswide Bank Ltd",
+    "productsUrls": [
+      "https://api.auswidebank.com.au/openbanking/cds-au/v1/banking/products",
+      "https://api.auswidebank.com.au/openbanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.auswidebank.com.au/openbanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bcu-bank",
+    "label": "BCU Bank",
+    "productsUrls": [
+      "https://public.cdr-api.bcu.com.au/cds-au/v1/banking/products",
+      "https://public.cdr-api.bcu.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr-api.bcu.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bnk-bank-goldfields-money-bchl",
+    "label": "BNK Bank (Goldfields Money/BCHL)",
+    "productsUrls": [
+      "https://public.cdr.bnk.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.bnk.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.bnk.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "boq-specialist",
+    "label": "BOQ Specialist",
+    "productsUrls": [
+      "https://api.cds.boqspecialist.com.au/cds-au/v1/banking/products",
+      "https://api.cds.boqspecialist.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.cds.boqspecialist.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bank-australia",
+    "label": "Bank Australia",
+    "productsUrls": [
+      "https://public.cdr.bankaust.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.bankaust.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.bankaust.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bank-first",
+    "label": "Bank First",
+    "productsUrls": [
+      "https://public.cdr.bankfirst.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.bankfirst.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.bankfirst.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bank-of-china",
+    "label": "Bank of China",
+    "productsUrls": [
+      "https://api-gateway.bankofchina.com.au/cds-au/v1/banking/products",
+      "https://api-gateway.bankofchina.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api-gateway.bankofchina.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bank-of-melbourne",
+    "label": "Bank of Melbourne",
+    "productsUrls": [
+      "https://digital-api.bankofmelbourne.com.au/cds-au/v1/banking/products",
+      "https://digital-api.bankofmelbourne.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://digital-api.bankofmelbourne.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bank-of-queensland-limited",
+    "label": "Bank of Queensland Limited",
+    "productsUrls": [
+      "https://api.cds.boq.com.au/cds-au/v1/banking/products",
+      "https://api.cds.boq.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.cds.boq.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bank-of-sydney",
+    "label": "Bank of Sydney",
+    "productsUrls": [
+      "https://openbank.api.banksyd.com.au/cds-au/v1/banking/products",
+      "https://openbank.api.banksyd.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://openbank.api.banksyd.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bank-of-us",
+    "label": "Bank of us",
+    "productsUrls": [
+      "https://api.bankofus.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://api.bankofus.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.bankofus.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "banksa",
+    "label": "BankSA",
+    "productsUrls": [
+      "https://digital-api.banksa.com.au/cds-au/v1/banking/products",
+      "https://digital-api.banksa.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://digital-api.banksa.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bankvic",
+    "label": "BankVic",
+    "productsUrls": [
+      "https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products",
+      "https://ib.bankvic.com.au/openbanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ib.bankvic.com.au/openbanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bankwest",
+    "label": "Bankwest",
+    "productsUrls": [
+      "https://open-api.bankwest.com.au/bwpublic/cds-au/v1/banking/products",
+      "https://open-api.bankwest.com.au/bwpublic/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://open-api.bankwest.com.au/bwpublic/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bendigo-bank",
+    "label": "Bendigo Bank",
+    "productsUrls": [
+      "https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products",
+      "https://api.cdr.bendigobank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.cdr.bendigobank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "beyond-bank-australia",
+    "label": "Beyond Bank Australia",
+    "productsUrls": [
+      "https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.api.beyondbank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.api.beyondbank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "border-bank",
+    "label": "Border Bank",
+    "productsUrls": [
+      "https://public.cdr.prd.borderbank.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.prd.borderbank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.prd.borderbank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "broken-hill-bank",
+    "label": "Broken Hill Bank",
+    "productsUrls": [
+      "https://public.cdr-api.bhccu.com.au/cds-au/v1/banking/products",
+      "https://public.cdr-api.bhccu.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr-api.bhccu.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "cba-commbiz",
+    "label": "CBA - CommBiz",
+    "productsUrls": [
+      "https://cdr.commbiz.api.commbank.com.au/cbzpublic/cds-au/v1/banking/products",
+      "https://cdr.commbiz.api.commbank.com.au/cbzpublic/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://cdr.commbiz.api.commbank.com.au/cbzpublic/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "cairns-bank",
+    "label": "Cairns bank",
+    "productsUrls": [
+      "https://openbanking.cairnsbank.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://openbanking.cairnsbank.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://openbanking.cairnsbank.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "central-murray-bank",
+    "label": "Central Murray Bank",
+    "productsUrls": [
+      "https://secure.centralmurray.bank/openbanking/cds-au/v1/banking/products",
+      "https://secure.centralmurray.bank/openbanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://secure.centralmurray.bank/openbanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "central-west-cul",
+    "label": "Central West CUL",
+    "productsUrls": [
+      "https://ib.cwcu.com.au/openbanking/cds-au/v1/banking/products",
+      "https://ib.cwcu.com.au/openbanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ib.cwcu.com.au/openbanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "coastline-bank",
+    "label": "Coastline Bank",
+    "productsUrls": [
+      "https://public.cdr-api.coastline.com.au/cds-au/v1/banking/products",
+      "https://public.cdr-api.coastline.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr-api.coastline.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "coles-credit-cards",
+    "label": "Coles Credit Cards",
+    "productsUrls": [
+      "https://api.openbanking.secure.coles.com.au/cds-au/v1/banking/products",
+      "https://api.openbanking.secure.coles.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.openbanking.secure.coles.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "commbank",
+    "label": "CommBank",
+    "productsUrls": [
+      "https://api.commbank.com.au/public/cds-au/v1/banking/products",
+      "https://api.commbank.com.au/public/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.commbank.com.au/public/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "commfcu",
+    "label": "CommFCU",
+    "productsUrls": [
+      "https://netbank.communityfirst.com.au/cf-OpenBanking/cds-au/v1/banking/products",
+      "https://netbank.communityfirst.com.au/cf-OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://netbank.communityfirst.com.au/cf-OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "connective-select",
+    "label": "Connective Select",
+    "productsUrls": [
+      "https://api.connective.app.bendigobank.com.au/cds-au/v1/banking/products",
+      "https://api.connective.app.bendigobank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.connective.app.bendigobank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "credit-union-sa",
+    "label": "Credit Union SA",
+    "productsUrls": [
+      "https://openbanking.api.creditunionsa.com.au/cds-au/v1/banking/products",
+      "https://openbanking.api.creditunionsa.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://openbanking.api.creditunionsa.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "ddh-graham",
+    "label": "DDH Graham",
+    "productsUrls": [
+      "https://api.cds.ddhgraham.com.au/cds-au/v1/banking/products",
+      "https://api.cds.ddhgraham.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.cds.ddhgraham.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "darling-downs-bank",
+    "label": "Darling Downs Bank",
+    "productsUrls": [
+      "https://openbanking.ddbank.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://openbanking.ddbank.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://openbanking.ddbank.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "defence-bank",
+    "label": "Defence Bank",
+    "productsUrls": [
+      "https://product.defencebank.com.au/cds-au/v1/banking/products",
+      "https://product.defencebank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://product.defencebank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "dnister",
+    "label": "Dnister",
+    "productsUrls": [
+      "https://public.cdr-api.dnister.com.au/cds-au/v1/banking/products",
+      "https://public.cdr-api.dnister.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr-api.dnister.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "easy-street",
+    "label": "Easy Street",
+    "productsUrls": [
+      "https://ebranch.easystreet.com.au/es-OpenBanking/cds-au/v1/banking/products",
+      "https://ebranch.easystreet.com.au/es-OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ebranch.easystreet.com.au/es-OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "family-first",
+    "label": "Family First",
+    "productsUrls": [
+      "https://public.cdr.familyfirst.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.familyfirst.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.familyfirst.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "fire-service-credit-union",
+    "label": "Fire Service Credit Union",
+    "productsUrls": [
+      "https://public.cdr-api.fscu.com.au/cds-au/v1/banking/products",
+      "https://public.cdr-api.fscu.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr-api.fscu.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "firefighters-mutual-bank",
+    "label": "Firefighters Mutual Bank",
+    "productsUrls": [
+      "https://ob.tmbl.com.au/fmbank/cds-au/v1/banking/products",
+      "https://ob.tmbl.com.au/fmbank/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ob.tmbl.com.au/fmbank/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "first-option-bank",
+    "label": "First Option Bank",
+    "productsUrls": [
+      "https://internetbanking.firstoption.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://internetbanking.firstoption.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://internetbanking.firstoption.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "g-c-mutual-bank",
+    "label": "G&C Mutual Bank",
+    "productsUrls": [
+      "https://ibank.gcmutualbank.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://ibank.gcmutualbank.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ibank.gcmutualbank.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "gateway-bank",
+    "label": "Gateway Bank",
+    "productsUrls": [
+      "https://public.cdr-api.gatewaybank.com.au/cds-au/v1/banking/products",
+      "https://public.cdr-api.gatewaybank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr-api.gatewaybank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "geelong-bank",
+    "label": "Geelong Bank",
+    "productsUrls": [
+      "https://online.geelongbank.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://online.geelongbank.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://online.geelongbank.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "great-southern-bank",
+    "label": "Great Southern Bank",
+    "productsUrls": [
+      "https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/products",
+      "https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.open-banking.greatsouthernbank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "great-southern-bank-business",
+    "label": "Great Southern Bank Business+",
+    "productsUrls": [
+      "https://od1.open-banking.business.greatsouthernbank.com.au/api/cds-au/v1/banking/products",
+      "https://od1.open-banking.business.greatsouthernbank.com.au/api/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://od1.open-banking.business.greatsouthernbank.com.au/api/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "greater-bank-limited",
+    "label": "Greater Bank Limited",
+    "productsUrls": [
+      "https://public.cdr.greater.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.greater.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.greater.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "hsbc",
+    "label": "HSBC",
+    "productsUrls": [
+      "https://public.ob.hsbc.com.au/cds-au/v1/banking/products",
+      "https://public.ob.hsbc.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.ob.hsbc.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "hsbc-bank-australia-limited-wholesale-banking",
+    "label": "HSBC Bank Australia Limited – Wholesale Banking",
+    "productsUrls": [
+      "https://public.ob.business.hsbc.com.au/cds-au/v1/banking/products",
+      "https://public.ob.business.hsbc.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.ob.business.hsbc.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "health-professionals-bank",
+    "label": "Health Professionals Bank",
+    "productsUrls": [
+      "https://ob.tmbl.com.au/hpbank/cds-au/v1/banking/products",
+      "https://ob.tmbl.com.au/hpbank/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ob.tmbl.com.au/hpbank/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "heartland",
+    "label": "Heartland",
+    "productsUrls": [
+      "https://api.cdr.heartlandbank.com.au/cds-au/v1/banking/products",
+      "https://api.cdr.heartlandbank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.cdr.heartlandbank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "horizon-bank",
+    "label": "Horizon Bank",
+    "productsUrls": [
+      "https://onlinebanking.horizonbank.com.au/openbanking/cds-au/v1/banking/products",
+      "https://onlinebanking.horizonbank.com.au/openbanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://onlinebanking.horizonbank.com.au/openbanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "hume-bank",
+    "label": "Hume Bank",
+    "productsUrls": [
+      "https://ibankob.humebank.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://ibankob.humebank.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ibankob.humebank.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "imb-bank",
+    "label": "IMB Bank",
+    "productsUrls": [
+      "https://openbank.openbanking.imb.com.au/cds-au/v1/banking/products",
+      "https://openbank.openbanking.imb.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://openbank.openbanking.imb.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "ing-bank-australia-ltd",
+    "label": "ING BANK (Australia) Ltd",
+    "productsUrls": [
+      "https://id.ob.ing.com.au/cds-au/v1/banking/products",
+      "https://id.ob.ing.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://id.ob.ing.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "judo-bank",
+    "label": "Judo Bank",
+    "productsUrls": [
+      "https://public.open.judo.bank/cds-au/v1/banking/products",
+      "https://public.open.judo.bank/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.open.judo.bank/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "kogan-money-credit-cards",
+    "label": "Kogan Money Credit Cards",
+    "productsUrls": [
+      "https://api.openbanking.cards.koganmoney.com.au/cds-au/v1/banking/products",
+      "https://api.openbanking.cards.koganmoney.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.openbanking.cards.koganmoney.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "laboratories-credit-union",
+    "label": "Laboratories Credit Union",
+    "productsUrls": [
+      "https://internetbanking.lcu.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://internetbanking.lcu.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://internetbanking.lcu.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "liberty-financial",
+    "label": "Liberty Financial",
+    "productsUrls": [
+      "https://services.liberty.com.au/api/data-holder-public/cds-au/v1/banking/products",
+      "https://services.liberty.com.au/api/data-holder-public/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://services.liberty.com.au/api/data-holder-public/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "me-bank",
+    "label": "ME Bank",
+    "productsUrls": [
+      "https://public.openbank.mebank.com.au/cds-au/v1/banking/products",
+      "https://public.openbank.mebank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.openbank.mebank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "me-bank-me-go",
+    "label": "ME Bank - ME Go",
+    "productsUrls": [
+      "https://api.cds.mebank.com.au/cds-au/v1/banking/products",
+      "https://api.cds.mebank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.cds.mebank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "move-bank",
+    "label": "MOVE Bank",
+    "productsUrls": [
+      "https://openbanking.movebank.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://openbanking.movebank.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://openbanking.movebank.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "macquarie-bank-limited",
+    "label": "Macquarie Bank Limited",
+    "productsUrls": [
+      "https://api.macquariebank.io/cds-au/v1/banking/products",
+      "https://api.macquariebank.io/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.macquariebank.io/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "maitland-mutual-limited",
+    "label": "Maitland Mutual Limited",
+    "productsUrls": [
+      "https://openbanking.themutual.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://openbanking.themutual.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://openbanking.themutual.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "mycard",
+    "label": "MyCard",
+    "productsUrls": [
+      "https://api-openbanking.secure.mycard.com.au/cds-au/v1/banking/products",
+      "https://api-openbanking.secure.mycard.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api-openbanking.secure.mycard.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "mystate-bank",
+    "label": "MyState Bank",
+    "productsUrls": [
+      "https://public.cdr.mystate.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.mystate.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.mystate.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "national-australia-bank",
+    "label": "NATIONAL AUSTRALIA BANK",
+    "productsUrls": [
+      "https://openbank.api.nab.com.au/cds-au/v1/banking/products",
+      "https://openbank.api.nab.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://openbank.api.nab.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "nrma-home-loans",
+    "label": "NRMA Home Loans",
+    "productsUrls": [
+      "https://api.nrma.app.bendigobank.com.au/cds-au/v1/banking/products",
+      "https://api.nrma.app.bendigobank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.nrma.app.bendigobank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "newcastle-permanent-building-society",
+    "label": "Newcastle Permanent Building Society",
+    "productsUrls": [
+      "https://openbank.newcastlepermanent.com.au/cds-au/v1/banking/products",
+      "https://openbank.newcastlepermanent.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://openbank.newcastlepermanent.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "northern-inland-credit-union-limited",
+    "label": "Northern Inland Credit Union Limited",
+    "productsUrls": [
+      "https://secure.nicu.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://secure.nicu.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://secure.nicu.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "orange-credit-union-ltd",
+    "label": "ORANGE CREDIT UNION LTD",
+    "productsUrls": [
+      "https://online.orangecu.com.au/openbanking/cds-au/v1/banking/products",
+      "https://online.orangecu.com.au/openbanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://online.orangecu.com.au/openbanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "p-n-bank",
+    "label": "P&N Bank",
+    "productsUrls": [
+      "https://public.cdr-api.pnbank.com.au/cds-au/v1/banking/products",
+      "https://public.cdr-api.pnbank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr-api.pnbank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "paypal-australia",
+    "label": "PayPal Australia",
+    "productsUrls": [
+      "https://api.paypal.com/v1/identity/cds-au/v1/banking/products",
+      "https://api.paypal.com/v1/identity/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.paypal.com/v1/identity/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "people-s-choice-and-heritage",
+    "label": "People's Choice and Heritage",
+    "productsUrls": [
+      "https://ob-public.peopleschoice.com.au/cds-au/v1/banking/products",
+      "https://ob-public.peopleschoice.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ob-public.peopleschoice.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "police-bank",
+    "label": "Police Bank",
+    "productsUrls": [
+      "https://public.cdr.prd.policebank.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.prd.policebank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.prd.policebank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "police-credit-union-ltd",
+    "label": "Police Credit Union Ltd",
+    "productsUrls": [
+      "https://api.policecu.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://api.policecu.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.policecu.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "qbank",
+    "label": "QBANK",
+    "productsUrls": [
+      "https://banking.qbank.com.au/openbanking/cds-au/v1/banking/products",
+      "https://banking.qbank.com.au/openbanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://banking.qbank.com.au/openbanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "qantas-money-credit-cards",
+    "label": "Qantas Money Credit Cards",
+    "productsUrls": [
+      "https://api.openbanking.qantasmoney.com/cds-au/v1/banking/products",
+      "https://api.openbanking.qantasmoney.com/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.openbanking.qantasmoney.com/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "qantas-money-home-loans",
+    "label": "Qantas Money Home Loans",
+    "productsUrls": [
+      "https://api.qantas.app.bendigobank.com.au/cds-au/v1/banking/products",
+      "https://api.qantas.app.bendigobank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.qantas.app.bendigobank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "qudos-bank",
+    "label": "Qudos Bank",
+    "productsUrls": [
+      "https://public.cdr.qudosbank.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.qudosbank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.qudosbank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "queensland-country-bank",
+    "label": "Queensland Country Bank",
+    "productsUrls": [
+      "https://public.cdr-api.queenslandcountry.bank/cds-au/v1/banking/products",
+      "https://public.cdr-api.queenslandcountry.bank/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr-api.queenslandcountry.bank/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "racq-bank",
+    "label": "RACQ Bank",
+    "productsUrls": [
+      "https://cdrbank.racq.com.au/cds-au/v1/banking/products",
+      "https://cdrbank.racq.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://cdrbank.racq.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "rams-financial-group-pty-ltd",
+    "label": "RAMS Financial Group Pty Ltd",
+    "productsUrls": [
+      "https://digital-api.westpac.com.au/rams/cds-au/v1/banking/products",
+      "https://digital-api.westpac.com.au/rams/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://digital-api.westpac.com.au/rams/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "rsl-money",
+    "label": "RSL Money",
+    "productsUrls": [
+      "https://public.open.rslmoney.com.au/cds-au/v1/banking/products",
+      "https://public.open.rslmoney.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.open.rslmoney.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "rabobank",
+    "label": "Rabobank",
+    "productsUrls": [
+      "https://openbanking.api.rabobank.com.au/public/cds-au/v1/banking/products",
+      "https://openbanking.api.rabobank.com.au/public/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://openbanking.api.rabobank.com.au/public/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "regional-australia-bank",
+    "label": "Regional Australia Bank",
+    "productsUrls": [
+      "https://public-data.cdr.regaustbank.io/cds-au/v1/banking/products",
+      "https://public-data.cdr.regaustbank.io/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public-data.cdr.regaustbank.io/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "reliance-bank",
+    "label": "Reliance Bank",
+    "productsUrls": [
+      "https://ibanking.reliancebank.com.au/rel-openbanking/cds-au/v1/banking/products",
+      "https://ibanking.reliancebank.com.au/rel-openbanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ibanking.reliancebank.com.au/rel-openbanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "swsbank",
+    "label": "SWSbank",
+    "productsUrls": [
+      "https://online.swsbank.com.au/openbanking/cds-au/v1/banking/products",
+      "https://online.swsbank.com.au/openbanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://online.swsbank.com.au/openbanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "solo-by-myob",
+    "label": "Solo by MYOB",
+    "productsUrls": [
+      "https://od1.open-banking.myob.greatsouthernbank.com.au/api/cds-au/v1/banking/products",
+      "https://od1.open-banking.myob.greatsouthernbank.com.au/api/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://od1.open-banking.myob.greatsouthernbank.com.au/api/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "southern-cross-credit-union",
+    "label": "Southern Cross Credit Union",
+    "productsUrls": [
+      "https://cdr.sccu.com.au/openbanking/cds-au/v1/banking/products",
+      "https://cdr.sccu.com.au/openbanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://cdr.sccu.com.au/openbanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "st-george-bank",
+    "label": "St.George Bank",
+    "productsUrls": [
+      "https://digital-api.stgeorge.com.au/cds-au/v1/banking/products",
+      "https://digital-api.stgeorge.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://digital-api.stgeorge.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "summerland-bank",
+    "label": "Summerland Bank",
+    "productsUrls": [
+      "https://public.cdr-api.summerland.com.au/cds-au/v1/banking/products",
+      "https://public.cdr-api.summerland.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr-api.summerland.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "suncorp-bank",
+    "label": "Suncorp Bank",
+    "productsUrls": [
+      "https://id-ob.suncorpbank.com.au/cds-au/v1/banking/products",
+      "https://id-ob.suncorpbank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://id-ob.suncorpbank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "tmcu",
+    "label": "TMCU",
+    "productsUrls": [
+      "https://banking.transportmutual.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://banking.transportmutual.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://banking.transportmutual.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "teachers-mutual-bank",
+    "label": "Teachers Mutual Bank",
+    "productsUrls": [
+      "https://ob.tmbl.com.au/tmbank/cds-au/v1/banking/products",
+      "https://ob.tmbl.com.au/tmbank/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ob.tmbl.com.au/tmbank/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "the-capricornian",
+    "label": "The Capricornian",
+    "productsUrls": [
+      "https://public.cdr.onlinebanking.capricornian.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.onlinebanking.capricornian.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.onlinebanking.capricornian.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "the-mac",
+    "label": "The Mac",
+    "productsUrls": [
+      "https://onlinebanking.themaccu.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://onlinebanking.themaccu.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://onlinebanking.themaccu.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "thriday",
+    "label": "Thriday",
+    "productsUrls": [
+      "https://public.cdr.thriday.com.au/cds-au/v1/banking/products",
+      "https://public.cdr.thriday.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.thriday.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "tiimely-home",
+    "label": "Tiimely Home",
+    "productsUrls": [
+      "https://api.tiimely.app.bendigobank.com.au/cds-au/v1/banking/products",
+      "https://api.tiimely.app.bendigobank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.tiimely.app.bendigobank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "traditional-credit-union",
+    "label": "Traditional Credit Union",
+    "productsUrls": [
+      "https://prd.tcu.com.au/cds-au/v1/banking/products",
+      "https://prd.tcu.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://prd.tcu.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "tyro-banking",
+    "label": "Tyro Banking",
+    "productsUrls": [
+      "https://od1.cdr.banking.tyro.com/api/cds-au/v1/banking/products",
+      "https://od1.cdr.banking.tyro.com/api/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://od1.cdr.banking.tyro.com/api/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "tyro-payments",
+    "label": "Tyro Payments",
+    "productsUrls": [
+      "https://public.cdr.tyro.com/cds-au/v1/banking/products",
+      "https://public.cdr.tyro.com/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr.tyro.com/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "ubank",
+    "label": "UBank",
+    "productsUrls": [
+      "https://public.cdr-api.86400.com.au/cds-au/v1/banking/products",
+      "https://public.cdr-api.86400.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.cdr-api.86400.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "unibank",
+    "label": "UniBank",
+    "productsUrls": [
+      "https://ob.tmbl.com.au/unibank/cds-au/v1/banking/products",
+      "https://ob.tmbl.com.au/unibank/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ob.tmbl.com.au/unibank/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "unity-bank",
+    "label": "Unity Bank",
+    "productsUrls": [
+      "https://ibanking.unitybank.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://ibanking.unitybank.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://ibanking.unitybank.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "unloan",
+    "label": "Unloan",
+    "productsUrls": [
+      "https://public.api.cdr.unloan.com.au/cds-au/v1/banking/products",
+      "https://public.api.cdr.unloan.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://public.api.cdr.unloan.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "up",
+    "label": "Up",
+    "productsUrls": [
+      "https://api.up.com.au/cds-au/v1/banking/products",
+      "https://api.up.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.up.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "virgin-money",
+    "label": "Virgin Money",
+    "productsUrls": [
+      "https://api.cds.virginmoney.com.au/cds-au/v1/banking/products",
+      "https://api.cds.virginmoney.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://api.cds.virginmoney.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "westpac",
+    "label": "Westpac",
+    "productsUrls": [
+      "https://digital-api.westpac.com.au/cds-au/v1/banking/products",
+      "https://digital-api.westpac.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://digital-api.westpac.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "wise",
+    "label": "Wise",
+    "productsUrls": [
+      "https://au-cdrbanking-pub.wise.com/cds-au/v1/banking/products",
+      "https://au-cdrbanking-pub.wise.com/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://au-cdrbanking-pub.wise.com/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "woolworths-team-bank",
+    "label": "Woolworths Team Bank",
+    "productsUrls": [
+      "https://online.woolworthsteambank.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://online.woolworthsteambank.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://online.woolworthsteambank.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "bankwaw",
+    "label": "bankWAW",
+    "productsUrls": [
+      "https://onlinebanking.wawcu.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://onlinebanking.wawcu.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://onlinebanking.wawcu.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "gmcu",
+    "label": "gmcu",
+    "productsUrls": [
+      "https://secure.gmcu.com.au/OpenBanking/cds-au/v1/banking/products",
+      "https://secure.gmcu.com.au/OpenBanking/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://secure.gmcu.com.au/OpenBanking/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  },
+  {
+    "id": "in1bank-ltd",
+    "label": "in1bank ltd.",
+    "productsUrls": [
+      "https://cdr.in1bank.com.au/cds-au/v1/banking/products",
+      "https://cdr.in1bank.com.au/cds-au/v1/products"
+    ],
+    "productDetailsUrlTemplate": "https://cdr.in1bank.com.au/cds-au/v1/banking/products/{productId}",
+    "headers": {}
+  }
+]

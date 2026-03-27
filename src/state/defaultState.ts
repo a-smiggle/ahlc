@@ -28,6 +28,7 @@ export const defaultState: AppState = {
   loanSettings: {
     repaymentType: "pi",
     termYears: 30,
+    desiredLoanAmount: 0,
     nominalRate: 0.062,
     assessmentRateBuffer: 0.03,
     assessmentRateFloor: 0.075,

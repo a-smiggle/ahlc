@@ -2,7 +2,7 @@ type DashboardTab = "personal" | "lending" | "loan" | "charts";
 
 const DASHBOARD_TABS: Array<{ id: DashboardTab; label: string }> = [
   { id: "personal", label: "Personal Details" },
-  { id: "lending", label: "Lending Power" },
+  { id: "lending", label: "Lending" },
   { id: "loan", label: "Loan Details" },
   { id: "charts", label: "Charts" }
 ];

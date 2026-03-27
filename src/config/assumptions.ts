@@ -1,4 +1,5 @@
 import type { ScenarioOverrides } from "@/types/models";
+import referenceData from "@/data/reference-data.latest.json";
 
 export interface TaxBracket {
   threshold: number;
@@ -18,9 +19,15 @@ export interface BankProfile {
   rentalShading: number;
   variableIncomeShading: number;
   expenseLoading: number;
+  indicativeVariableRate?: number;
+  notes?: string;
 }
 
 export interface Assumptions {
+  referenceDataVersion: string;
+  referenceDataUpdatedAtIso: string;
+  bankProfilesNote?: string;
+  bankProfilesAsOfDate?: string;
   medicareLevyRate: number;
   residentTaxBrackets: TaxBracket[];
   hecsBrackets: HecsBracket[];
@@ -35,69 +42,48 @@ export interface Assumptions {
 }
 
 export const assumptions: Assumptions = {
-  medicareLevyRate: 0.02,
-  residentTaxBrackets: [
-    { threshold: 0, baseTax: 0, rate: 0 },
-    { threshold: 18200, baseTax: 0, rate: 0.16 },
-    { threshold: 45000, baseTax: 4288, rate: 0.3 },
-    { threshold: 135000, baseTax: 31288, rate: 0.37 },
-    { threshold: 190000, baseTax: 51638, rate: 0.45 }
-  ],
-  hecsBrackets: [
-    { threshold: 54800, rate: 0.01 },
-    { threshold: 63090, rate: 0.025 },
-    { threshold: 66876, rate: 0.03 },
-    { threshold: 70909, rate: 0.035 },
-    { threshold: 75244, rate: 0.04 },
-    { threshold: 79831, rate: 0.045 },
-    { threshold: 84720, rate: 0.05 },
-    { threshold: 89934, rate: 0.055 },
-    { threshold: 95457, rate: 0.06 },
-    { threshold: 101328, rate: 0.065 },
-    { threshold: 107676, rate: 0.07 },
-    { threshold: 114525, rate: 0.075 },
-    { threshold: 121896, rate: 0.08 },
-    { threshold: 129838, rate: 0.085 },
-    { threshold: 138378, rate: 0.09 },
-    { threshold: 147540, rate: 0.095 },
-    { threshold: 157372, rate: 0.1 }
-  ],
-  hemExpenseFloorAnnual: 42000,
-  defaultExpenseLoading: 1.1,
-  defaultVariableIncomeShading: 0.8,
-  defaultRentalShading: 0.75,
-  maxBorrowLvr: 0.8,
-  defaultStressRate: 0.075,
-  bankProfiles: [
+  referenceDataVersion: referenceData.metadata?.datasetVersion ?? "unknown",
+  referenceDataUpdatedAtIso: referenceData.metadata?.updatedAtIso ?? "",
+  bankProfilesNote: (referenceData as Record<string, unknown>).bankProfilesNote as string | undefined,
+  bankProfilesAsOfDate: (referenceData as Record<string, unknown>).bankProfilesAsOfDate as string | undefined,
+  medicareLevyRate: referenceData.medicareLevyRate,
+  residentTaxBrackets: referenceData.residentTaxBrackets,
+  hecsBrackets: referenceData.hecsBrackets,
+  hemExpenseFloorAnnual: referenceData.hemExpenseFloorAnnual,
+  defaultExpenseLoading: referenceData.defaultExpenseLoading,
+  defaultVariableIncomeShading: referenceData.defaultVariableIncomeShading,
+  defaultRentalShading: referenceData.defaultRentalShading,
+  maxBorrowLvr: referenceData.maxBorrowLvr,
+  defaultStressRate: referenceData.defaultStressRate,
+  bankProfiles: referenceData.bankProfiles,
+  defaultScenarios: [
     {
-      id: "major-bank-a",
-      label: "Major Bank A",
-      assessmentBuffer: 0.03,
-      rentalShading: 0.75,
-      variableIncomeShading: 0.8,
-      expenseLoading: 1.1
-    },
-    {
-      id: "major-bank-b",
-      label: "Major Bank B",
-      assessmentBuffer: 0.025,
-      rentalShading: 0.8,
-      variableIncomeShading: 0.75,
-      expenseLoading: 1.12
-    },
-    {
-      id: "credit-union",
-      label: "Credit Union",
+      label: "Conservative",
       assessmentBuffer: 0.03,
       rentalShading: 0.7,
       variableIncomeShading: 0.8,
-      expenseLoading: 1.08
+      expenseLoading: 1.12,
+      indicativeVariableRate: 0.062,
+      keepAssets: true
+    },
+    {
+      label: "Base",
+      assessmentBuffer: 0.03,
+      rentalShading: 0.75,
+      variableIncomeShading: 0.8,
+      expenseLoading: 1.1,
+      indicativeVariableRate: 0.062,
+      keepAssets: true
+    },
+    {
+      label: "Aggressive",
+      assessmentBuffer: 0.025,
+      rentalShading: 0.8,
+      variableIncomeShading: 0.8,
+      expenseLoading: 1.05,
+      indicativeVariableRate: 0.062,
+      keepAssets: true
     }
-  ],
-  defaultScenarios: [
-    { label: "Conservative", assessmentBuffer: 0.03, expenseLoading: 1.12, rentalShading: 0.7 },
-    { label: "Base", assessmentBuffer: 0.03, expenseLoading: 1.1, rentalShading: 0.75 },
-    { label: "Aggressive", assessmentBuffer: 0.025, expenseLoading: 1.05, rentalShading: 0.8 }
   ]
 };
 

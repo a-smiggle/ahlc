@@ -17,7 +17,7 @@ import {
   YAxis
 } from "recharts";
 import { assumptions } from "@/config/assumptions";
-import { calculateAllScenarios } from "@/engine/scenario";
+import { calculateAllScenarios, calculateScenario } from "@/engine/scenario";
 import { defaultState } from "@/state/defaultState";
 import type {
   AppState,
@@ -38,6 +38,17 @@ import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ThemeToggleButton } from "@/components/ui/ThemeToggleButton";
 import { currency, percent } from "@/utils/format";
+import {
+  clearAllBankProfileOverrides,
+  mergeBankProfilesWithOverrides
+} from "@/utils/bankProfiles";
+import {
+  applyLiveRatesToProfiles,
+  clearLiveRatesCache,
+  isLiveRatesCacheStale,
+  readLiveRatesCache,
+  refreshLiveRates
+} from "@/utils/liveRates";
 import { clearState, exportStateJson, importStateJson, loadState, saveState } from "@/utils/storage";
 import type { DashboardTab } from "@/components/ui/DashboardTabs";
 
@@ -60,6 +71,43 @@ const updateNumber = <T extends object>(obj: T, key: keyof T, value: string): T 
   };
 };
 
+const isEditableElement = (target: EventTarget | null): boolean => {
+  if (!(target instanceof HTMLElement)) {
+    return false;
+  }
+
+  if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement) {
+    return true;
+  }
+
+  return target.isContentEditable;
+};
+
+const normalizeScenario = (
+  scenario: ScenarioOverrides,
+  nominalRate: number,
+  profiles: typeof assumptions.bankProfiles
+): ScenarioOverrides => {
+  const profile = scenario.bankProfileId ? profiles.find((candidate) => candidate.id === scenario.bankProfileId) : undefined;
+
+  return {
+    ...scenario,
+    assessmentBuffer: scenario.assessmentBuffer ?? profile?.assessmentBuffer ?? 0.03,
+    rentalShading: scenario.rentalShading ?? profile?.rentalShading ?? assumptions.defaultRentalShading,
+    variableIncomeShading:
+      scenario.variableIncomeShading ?? scenario.incomeShading ?? profile?.variableIncomeShading ?? assumptions.defaultVariableIncomeShading,
+    expenseLoading: scenario.expenseLoading ?? profile?.expenseLoading ?? assumptions.defaultExpenseLoading,
+    indicativeVariableRate: scenario.indicativeVariableRate ?? profile?.indicativeVariableRate ?? nominalRate,
+    keepAssets: scenario.keepAssets ?? true
+  };
+};
+
+const normalizeScenarios = (
+  scenarios: ScenarioOverrides[],
+  nominalRate: number,
+  profiles: typeof assumptions.bankProfiles
+): ScenarioOverrides[] => scenarios.map((scenario) => normalizeScenario(scenario, nominalRate, profiles));
+
 export const Dashboard = () => {
   const [state, setState] = useState<AppState>(defaultState);
   const [expenseCadence, setExpenseCadence] = useState<ExpenseCadence>("yearly");
@@ -69,6 +117,11 @@ export const Dashboard = () => {
   const [hasAcceptedLegal, setHasAcceptedLegal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<DashboardTab>("personal");
+  const [bankProfilesRevision, setBankProfilesRevision] = useState(0);
+  const [liveRatesStatus, setLiveRatesStatus] = useState<"idle" | "fetching" | "done">("idle");
+  const [providerToAdd, setProviderToAdd] = useState<string>("");
+  const [isEditingField, setIsEditingField] = useState(false);
+  const [hasUnsavedState, setHasUnsavedState] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   const applyTheme = (dark: boolean) => {
@@ -84,7 +137,14 @@ export const Dashboard = () => {
     const restored = loadState();
 
     if (restored) {
-      setState(restored);
+      setState({
+        ...restored,
+        scenarios: normalizeScenarios(
+          restored.scenarios,
+          restored.loanSettings?.nominalRate ?? defaultState.loanSettings.nominalRate,
+          assumptions.bankProfiles
+        )
+      });
     }
 
     const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
@@ -98,24 +158,55 @@ export const Dashboard = () => {
   }, []);
 
   useEffect(() => {
+    if (!isHydrated) {
+      return;
+    }
+
+    setHasUnsavedState(true);
+  }, [state, isHydrated]);
+
+  useEffect(() => {
+    if (!isHydrated || !hasUnsavedState || isEditingField) {
+      return;
+    }
+
     saveState(state);
-  }, [state]);
+    setHasUnsavedState(false);
+  }, [state, isHydrated, hasUnsavedState, isEditingField]);
 
   useEffect(() => {
     if (!isHydrated) {
       return;
     }
 
-    window.localStorage.setItem(THEME_STORAGE_KEY, isDark ? "dark" : "light");
-  }, [isDark, isHydrated]);
+    const onPageHide = () => {
+      if (hasUnsavedState) {
+        saveState(state);
+      }
+    };
+
+    window.addEventListener("pagehide", onPageHide);
+
+    return () => {
+      window.removeEventListener("pagehide", onPageHide);
+    };
+  }, [state, hasUnsavedState, isHydrated]);
 
   useEffect(() => {
-    if (!isHydrated || !hasAcceptedLegal) {
+    if (!isHydrated || isEditingField) {
+      return;
+    }
+
+    window.localStorage.setItem(THEME_STORAGE_KEY, isDark ? "dark" : "light");
+  }, [isDark, isHydrated, isEditingField]);
+
+  useEffect(() => {
+    if (!isHydrated || !hasAcceptedLegal || isEditingField) {
       return;
     }
 
     window.localStorage.setItem(LEGAL_ACCEPTED_STORAGE_KEY, "true");
-  }, [hasAcceptedLegal, isHydrated]);
+  }, [hasAcceptedLegal, isHydrated, isEditingField]);
 
   useEffect(() => {
     if (!menuOpen) {
@@ -137,7 +228,31 @@ export const Dashboard = () => {
     };
   }, [menuOpen]);
 
-  const output = useMemo(() => calculateAllScenarios(state), [state]);
+  // Refresh live CDR rates in the background on first load or when cache is > 1 day old.
+  useEffect(() => {
+    const cache = readLiveRatesCache();
+    if (!isLiveRatesCacheStale(cache)) return;
+    setLiveRatesStatus("fetching");
+    refreshLiveRates()
+      .then(() => {
+        setLiveRatesStatus("done");
+        setBankProfilesRevision((prev) => prev + 1);
+      })
+      .catch(() => {
+        setLiveRatesStatus("done");
+      });
+  }, []);
+
+  const bankProfiles = useMemo(
+    () => {
+      void bankProfilesRevision;
+      const withLive = applyLiveRatesToProfiles(assumptions.bankProfiles);
+      return mergeBankProfilesWithOverrides(withLive);
+    },
+    [bankProfilesRevision]
+  );
+
+  const output = useMemo(() => calculateAllScenarios(state, bankProfiles), [state, bankProfiles]);
   const scenarioResults = output.scenarioResults;
   const primaryScenario = scenarioResults[0];
 
@@ -183,6 +298,44 @@ export const Dashboard = () => {
   }));
 
   const minStressMonthly = borrowingComparison.length > 0 ? Math.min(...borrowingComparison.map((d) => d.stress || 0)) / 12 : 0;
+  const highestBorrowingPower = borrowingComparison.length > 0 ? Math.max(...borrowingComparison.map((d) => d.borrowingPower || 0)) : 0;
+  const desiredLoanExceedsCapacity = state.loanSettings.desiredLoanAmount > highestBorrowingPower;
+
+  useEffect(() => {
+    if (!isHydrated) {
+      return;
+    }
+
+    if (highestBorrowingPower <= 0) {
+      return;
+    }
+
+    // Only apply the default when the user has not provided a desired amount yet.
+    if (state.loanSettings.desiredLoanAmount > 0) {
+      return;
+    }
+
+    setState((prev) => ({
+      ...prev,
+      loanSettings: {
+        ...prev.loanSettings,
+        desiredLoanAmount: highestBorrowingPower
+      }
+    }));
+  }, [highestBorrowingPower, isHydrated, state.loanSettings.desiredLoanAmount]);
+
+  const getScenarioBaseline = (profileId?: string) => {
+    const profile = profileId ? bankProfiles.find((candidate) => candidate.id === profileId) : undefined;
+
+    return {
+      assessmentBuffer: profile?.assessmentBuffer ?? state.loanSettings.assessmentRateBuffer,
+      rentalShading: profile?.rentalShading ?? assumptions.defaultRentalShading,
+      variableIncomeShading: profile?.variableIncomeShading ?? assumptions.defaultVariableIncomeShading,
+      expenseLoading: profile?.expenseLoading ?? assumptions.defaultExpenseLoading,
+      indicativeVariableRate: profile?.indicativeVariableRate ?? state.loanSettings.nominalRate,
+      keepAssets: true
+    };
+  };
 
   const handleIncomeChange = (index: number, patch: Partial<IncomeStream>) => {
     setState((prev) => ({
@@ -235,6 +388,84 @@ export const Dashboard = () => {
     }));
   };
 
+  const handleBankProfileChange = (index: number, bankProfileId?: string) => {
+    const baseline = getScenarioBaseline(bankProfileId);
+
+    setState((prev) => ({
+      ...prev,
+      scenarios: prev.scenarios.map((scenario, i) =>
+        i === index
+          ? {
+              ...scenario,
+              bankProfileId,
+              assessmentBuffer: baseline.assessmentBuffer,
+              rentalShading: baseline.rentalShading,
+              variableIncomeShading: baseline.variableIncomeShading,
+              expenseLoading: baseline.expenseLoading,
+              indicativeVariableRate: baseline.indicativeVariableRate,
+              keepAssets: scenario.keepAssets ?? true
+            }
+          : scenario
+      )
+    }));
+  };
+
+  const buildScenarioFromProfile = (profile: (typeof bankProfiles)[number]): ScenarioOverrides => ({
+    label: profile.label,
+    bankProfileId: profile.id,
+    assessmentBuffer: profile.assessmentBuffer,
+    rentalShading: profile.rentalShading,
+    variableIncomeShading: profile.variableIncomeShading,
+    expenseLoading: profile.expenseLoading,
+    indicativeVariableRate: profile.indicativeVariableRate ?? state.loanSettings.nominalRate,
+    keepAssets: true
+  });
+
+  const generateTopProviders = () => {
+    const ranked = bankProfiles
+      .map((profile) => {
+        const scenario = buildScenarioFromProfile(profile);
+        const result = calculateScenario(state, scenario, bankProfiles);
+
+        return {
+          scenario,
+          borrowingPower: result.borrowingPower,
+          variableRate: scenario.indicativeVariableRate
+        };
+      })
+      .sort((a, b) => {
+        if (b.borrowingPower !== a.borrowingPower) {
+          return b.borrowingPower - a.borrowingPower;
+        }
+
+        return a.variableRate - b.variableRate;
+      })
+      .slice(0, 3)
+      .map((entry, index) => ({
+        ...entry.scenario,
+        label: `${entry.scenario.label} (${index + 1})`
+      }));
+
+    setState((prev) => ({
+      ...prev,
+      scenarios: ranked
+    }));
+  };
+
+  const addProviderScenario = () => {
+    const profile = bankProfiles.find((candidate) => candidate.id === providerToAdd);
+
+    if (!profile) {
+      return;
+    }
+
+    setState((prev) => ({
+      ...prev,
+      scenarios: [...prev.scenarios, { ...buildScenarioFromProfile(profile), label: profile.label }]
+    }));
+    setProviderToAdd("");
+  };
+
   const onExport = () => {
     const blob = new Blob([exportStateJson(state)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -254,7 +485,14 @@ export const Dashboard = () => {
     reader.onload = () => {
       try {
         const parsed = importStateJson(String(reader.result));
-        setState(parsed);
+        setState({
+          ...parsed,
+          scenarios: normalizeScenarios(
+            parsed.scenarios,
+            parsed.loanSettings?.nominalRate ?? defaultState.loanSettings.nominalRate,
+            assumptions.bankProfiles
+          )
+        });
         setImportError(null);
       } catch {
         setImportError("Import failed. Please provide a valid exported JSON file.");
@@ -272,7 +510,18 @@ export const Dashboard = () => {
   const isChartsTab = activeTab === "charts";
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_18rem]">
+    <div
+      className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_18rem]"
+      onFocusCapture={(event) => {
+        if (isEditableElement(event.target)) {
+          setIsEditingField(true);
+        }
+      }}
+      onBlurCapture={() => {
+        const active = document.activeElement;
+        setIsEditingField(isEditableElement(active));
+      }}
+    >
       <div className="space-y-6 fade-in">
       <section className="panel p-4 md:p-6">
         <div className="flex items-center justify-between gap-4">
@@ -289,6 +538,11 @@ export const Dashboard = () => {
                 onClose={() => setMenuOpen(false)}
                 onExport={onExport}
                 onImport={onImport}
+                onResetBankProfiles={() => {
+                  clearAllBankProfileOverrides();
+                  clearLiveRatesCache();
+                  setBankProfilesRevision((prev) => prev + 1);
+                }}
                 onReset={() => {
                   clearState();
                   setState(defaultState);
@@ -298,6 +552,9 @@ export const Dashboard = () => {
           </div>
         </div>
         {importError ? <p className="mt-2 text-sm text-token-risk">{importError}</p> : null}
+        {liveRatesStatus === "fetching" ? (
+          <p className="mt-2 text-xs text-token-ink/50">Refreshing live rate data&hellip;</p>
+        ) : null}
       </section>
 
       <DashboardTabs activeTab={activeTab} onChange={setActiveTab} />
@@ -830,7 +1087,7 @@ export const Dashboard = () => {
 
         {isLoanTab || isLendingTab ? (
         <div className="panel space-y-4 p-4 md:p-6">
-          <h2 className="text-2xl font-bold text-token-risk">{isLoanTab ? "Loan Details" : "Lending Power Scenarios"}</h2>
+          <h2 className="text-2xl font-bold text-token-risk">{isLoanTab ? "Loan Details" : "Lending"}</h2>
           {isLoanTab ? (
           <div className="grid gap-3 md:grid-cols-2">
             <label className="space-y-1 text-sm" title="Select repayment type: Principal & Interest = repay balance and interest, Interest Only = pay interest only during IO period.">
@@ -864,6 +1121,28 @@ export const Dashboard = () => {
                 }
                 title="Loan term in years"
               />
+            </label>
+            <label className="space-y-1 text-sm" title="Enter your target loan amount to compare against provider borrowing power.">
+              <span className="block text-xs font-semibold text-token-ink/75">Desired Loan Amount</span>
+              <input
+                className="rounded border p-2"
+                type="number"
+                value={state.loanSettings.desiredLoanAmount}
+                onChange={(event) =>
+                  setState((prev) => ({
+                    ...prev,
+                    loanSettings: { ...prev.loanSettings, desiredLoanAmount: Number(event.target.value) || 0 }
+                  }))
+                }
+                title="Desired loan amount"
+              />
+              {state.loanSettings.desiredLoanAmount > 0 ? (
+                <p className={`text-xs font-semibold ${desiredLoanExceedsCapacity ? "text-token-risk" : "text-token-income"}`}>
+                  {desiredLoanExceedsCapacity
+                    ? `Desired loan exceeds highest borrowing power (${currency(highestBorrowingPower)}).`
+                    : `Desired loan is within highest borrowing power (${currency(highestBorrowingPower)}).`}
+                </p>
+              ) : null}
             </label>
             <label className="space-y-1 text-sm" title="Enter the nominal annual interest rate.">
               <span className="block text-xs font-semibold text-token-ink/75">Nominal Interest Rate</span>
@@ -931,15 +1210,45 @@ export const Dashboard = () => {
           ) : null}
           {isLendingTab ? (
           <div className="space-y-2">
-            {state.scenarios.length === 0 ? <p className="text-sm text-token-ink/70">No scenarios yet. Add a scenario to compare outcomes.</p> : null}
+            <div className="flex flex-wrap items-center gap-2">
+              <PrimaryButton className="bg-token-scenario" onClick={generateTopProviders}>
+                Generate Top 3 Providers
+              </PrimaryButton>
+              <select
+                className="min-w-0 flex-1 rounded border p-2 md:max-w-sm"
+                value={providerToAdd}
+                onChange={(event) => setProviderToAdd(event.target.value)}
+                title="Select provider to add"
+              >
+                <option value="">Select provider to add</option>
+                {bankProfiles.map((profile) => (
+                  <option key={profile.id} value={profile.id}>
+                    {profile.label}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                className="rounded border border-token-ink/20 px-3 py-2 text-xs font-semibold hover:bg-token-mist disabled:cursor-not-allowed disabled:opacity-50"
+                onClick={addProviderScenario}
+                disabled={!providerToAdd}
+              >
+                Add Provider
+              </button>
+            </div>
+            {state.scenarios.length === 0 ? (
+              <p className="text-sm text-token-ink/70">
+                Enter your inputs, then click Generate Top 3 Providers.
+              </p>
+            ) : null}
             {state.scenarios.map((scenario, index) => (
-              <div key={scenario.label + index} className="grid gap-2 rounded border border-token-ink/15 p-3 md:grid-cols-3">
+              <div key={index} className="grid gap-2 rounded border border-token-ink/15 p-3 md:grid-cols-3">
                 <ItemCardHeader
                   className="md:col-span-3"
-                  label={<span className="text-xs font-semibold text-token-ink/60">Scenario {index + 1}</span>}
+                  label={<span className="text-xs font-semibold text-token-ink/60">Provider {index + 1}</span>}
                   action={
                     <DeleteIconButton
-                      label="Remove scenario"
+                      label="Remove provider"
                       onClick={() =>
                         setState((prev) => ({
                           ...prev,
@@ -949,31 +1258,63 @@ export const Dashboard = () => {
                     />
                   }
                 />
-                <label className="space-y-1 text-sm" title="Name this lending scenario.">
-                  <span className="block text-xs font-semibold text-token-ink/75">Scenario Name</span>
+                <label className="space-y-1 text-sm" title="Name this provider row.">
+                  <span className="block text-xs font-semibold text-token-ink/75">Provider Name</span>
                   <input
                     className="rounded border p-2"
                     value={scenario.label}
                     onChange={(event) => handleScenarioChange(index, { label: event.target.value })}
-                    title="Scenario label"
+                    title="Provider label"
                   />
                 </label>
-                <label className="space-y-1 text-sm" title="Choose a bank profile preset to apply that lender's servicing assumptions, or select No bank preset to use your custom scenario settings.">
+                <div className="space-y-1 text-sm" title="Choose a bank profile preset to apply that lender's servicing assumptions, or select No bank preset to use your custom scenario settings.">
                   <span className="block text-xs font-semibold text-token-ink/75">Bank Profile Preset</span>
-                  <select
-                    className="rounded border p-2"
-                    value={scenario.bankProfileId ?? ""}
-                    onChange={(event) => handleScenarioChange(index, { bankProfileId: event.target.value || undefined })}
-                    title="Bank profile preset"
-                  >
-                    <option value="">No bank preset</option>
-                    {assumptions.bankProfiles.map((profile) => (
-                      <option key={profile.id} value={profile.id}>
-                        {profile.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                  <div className="flex items-center gap-2">
+                    <select
+                      className="min-w-0 flex-1 rounded border p-2"
+                      value={scenario.bankProfileId ?? ""}
+                      onChange={(event) => handleBankProfileChange(index, event.target.value || undefined)}
+                      title="Bank profile preset"
+                    >
+                      <option value="">No bank preset</option>
+                      {bankProfiles.map((profile) => (
+                        <option key={profile.id} value={profile.id}>
+                          {profile.label}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      type="button"
+                      className="shrink-0 rounded border border-token-ink/20 px-3 py-2 text-xs font-semibold hover:bg-token-mist disabled:cursor-not-allowed disabled:opacity-50"
+                      onClick={() => handleBankProfileChange(index, scenario.bankProfileId)}
+                      disabled={!scenario.bankProfileId}
+                      title="Reset scenario values to selected bank defaults"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                </div>
+                {(() => {
+                  const selectedBank = scenario.bankProfileId
+                    ? bankProfiles.find((candidate) => candidate.id === scenario.bankProfileId)
+                    : undefined;
+                  const baseline = getScenarioBaseline(scenario.bankProfileId);
+                  const isModifiedFromBank =
+                    !!selectedBank &&
+                    (scenario.assessmentBuffer !== baseline.assessmentBuffer ||
+                      scenario.rentalShading !== baseline.rentalShading ||
+                      scenario.variableIncomeShading !== baseline.variableIncomeShading ||
+                      scenario.expenseLoading !== baseline.expenseLoading ||
+                      scenario.indicativeVariableRate !== baseline.indicativeVariableRate);
+
+                  return selectedBank ? (
+                    <p className="md:col-span-3 text-xs font-semibold text-token-ink/65">
+                      {isModifiedFromBank
+                        ? `Using ${selectedBank.label} as a base (modified from default values).`
+                        : `Using ${selectedBank.label} default values.`}
+                    </p>
+                  ) : null;
+                })()}
                 <label className="flex items-center gap-2 text-sm" title="Keep assets options: enabled = include current assets/equity in this scenario, disabled = ignore existing assets.">
                   <input
                     type="checkbox"
@@ -983,62 +1324,67 @@ export const Dashboard = () => {
                   />
                   Keep assets
                 </label>
-                <label className="space-y-1 text-sm" title="Income recognition factor for this scenario.">
-                  <span className="block text-xs font-semibold text-token-ink/75">Income Shading Factor</span>
+                <label className="space-y-1 text-sm" title="Variable income recognition factor for this provider.">
+                  <span className="block text-xs font-semibold text-token-ink/75">Variable Income Shading</span>
                   <input
                     className="rounded border p-2"
                     type="number"
                     step="0.01"
-                    value={scenario.incomeShading ?? assumptions.defaultVariableIncomeShading}
-                    onChange={(event) => handleScenarioChange(index, { incomeShading: Number(event.target.value) || 0 })}
-                    title="Scenario income shading"
+                    value={scenario.variableIncomeShading}
+                    onChange={(event) =>
+                      handleScenarioChange(index, { variableIncomeShading: Number(event.target.value) || 0 })
+                    }
+                    title="Provider variable income shading"
                   />
                 </label>
-                <label className="space-y-1 text-sm" title="Rental income recognition factor for this scenario.">
+                <label className="space-y-1 text-sm" title="Rental income recognition factor for this provider.">
                   <span className="block text-xs font-semibold text-token-ink/75">Rental Shading Factor</span>
                   <input
                     className="rounded border p-2"
                     type="number"
                     step="0.01"
-                    value={scenario.rentalShading ?? assumptions.defaultRentalShading}
+                    value={scenario.rentalShading}
                     onChange={(event) => handleScenarioChange(index, { rentalShading: Number(event.target.value) || 0 })}
-                    title="Scenario rental shading"
+                    title="Provider rental shading"
                   />
                 </label>
-                <label className="space-y-1 text-sm" title="Expense uplift factor for this scenario.">
+                <label className="space-y-1 text-sm" title="Expense uplift factor for this provider.">
                   <span className="block text-xs font-semibold text-token-ink/75">Expense Loading Factor</span>
                   <input
                     className="rounded border p-2"
                     type="number"
                     step="0.01"
-                    value={scenario.expenseLoading ?? assumptions.defaultExpenseLoading}
+                    value={scenario.expenseLoading}
                     onChange={(event) => handleScenarioChange(index, { expenseLoading: Number(event.target.value) || 0 })}
-                    title="Scenario expense loading"
+                    title="Provider expense loading"
+                  />
+                </label>
+                <label className="space-y-1 text-sm" title="Assessment buffer applied above nominal rate for this provider.">
+                  <span className="block text-xs font-semibold text-token-ink/75">Assessment Buffer</span>
+                  <input
+                    className="rounded border p-2"
+                    type="number"
+                    step="0.001"
+                    value={scenario.assessmentBuffer}
+                    onChange={(event) => handleScenarioChange(index, { assessmentBuffer: Number(event.target.value) || 0 })}
+                    title="Provider assessment buffer"
+                  />
+                </label>
+                <label className="space-y-1 text-sm" title="Indicative variable rate used for this provider's repayment assumptions.">
+                  <span className="block text-xs font-semibold text-token-ink/75">Indicative Variable Rate</span>
+                  <input
+                    className="rounded border p-2"
+                    type="number"
+                    step="0.0001"
+                    value={scenario.indicativeVariableRate}
+                    onChange={(event) =>
+                      handleScenarioChange(index, { indicativeVariableRate: Number(event.target.value) || 0 })
+                    }
+                    title="Provider indicative variable rate"
                   />
                 </label>
               </div>
             ))}
-            <PrimaryButton
-              className="bg-token-scenario"
-              onClick={() =>
-                setState((prev) => ({
-                  ...prev,
-                  scenarios: [
-                    ...prev.scenarios,
-                    {
-                      label: `Scenario ${prev.scenarios.length + 1}`,
-                      assessmentBuffer: 0.03,
-                      incomeShading: assumptions.defaultVariableIncomeShading,
-                      rentalShading: assumptions.defaultRentalShading,
-                      expenseLoading: assumptions.defaultExpenseLoading,
-                      keepAssets: true
-                    }
-                  ]
-                }))
-              }
-            >
-              Add scenario
-            </PrimaryButton>
           </div>
           ) : null}
         </div>

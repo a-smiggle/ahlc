@@ -58,6 +58,7 @@ export interface HouseholdExpenses {
 export interface LoanSettings {
   repaymentType: LoanRepaymentType;
   termYears: number;
+  desiredLoanAmount: number;
   nominalRate: number;
   assessmentRateBuffer: number;
   assessmentRateFloor: number;
@@ -67,10 +68,13 @@ export interface LoanSettings {
 
 export interface ScenarioOverrides {
   label: string;
+  variableIncomeShading: number;
+  rentalShading: number;
+  expenseLoading: number;
+  assessmentBuffer: number;
+  indicativeVariableRate: number;
+  // Legacy field kept for imported old states; replaced by variableIncomeShading.
   incomeShading?: number;
-  rentalShading?: number;
-  expenseLoading?: number;
-  assessmentBuffer?: number;
   keepAssets?: boolean;
   bankProfileId?: string;
 }
